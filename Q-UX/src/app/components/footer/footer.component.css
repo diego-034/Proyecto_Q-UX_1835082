@@ -1,0 +1,17 @@
+footer {
+    position: absolute;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    width: 100%;
+    height: 100px;
+    background-color: #000;
+  }
+  footer p {
+    font-size: 12px;
+  }
+  
+  footer .social ul li {
+    margin-right: 10px;
+    font-size: 14px;
+    display: inline;
+  }
