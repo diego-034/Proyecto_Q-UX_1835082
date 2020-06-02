@@ -1,6 +1,11 @@
+label {
+  color: #bbbbbb;
+}
+
 .contact {
     height: 475px;
     background-color: #111;
+    color: #bbbbbb;
   }
   
   .contact h1 {
@@ -18,7 +23,7 @@
     border-width: 0 0 1px 0;
     border-color: #b4b4b4;
     background-color: #111;
-    color: #b4b4b4;
+    color: #ffffff;
     font-size: 18px;
     line-height: 24px;
   }
@@ -48,7 +53,7 @@
   .contact-form .submit-btn {
     display: inline-block;
     background-color: #000;
-    color: #b4b4b4;
+    color: #bbbbbb;
     font-size: 14px;
     line-height: 24px;
     padding: 8px 16px;
@@ -70,8 +75,9 @@
     font-size: 16px;
     line-height: 21px;
   }
+
   .note .link {
-    color: #888;
+    color: rgb(255, 255, 255);
     text-decoration: none;
   }
   .note .link:hover {
