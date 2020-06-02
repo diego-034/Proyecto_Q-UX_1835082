@@ -4,8 +4,9 @@
     margin-bottom: 0;
     border-radius: 0;
     background-color: #000;
-  }
-  
+    height: 565px;
+        
+  }  
   .jumbotron p:last-child {
     margin-bottom: 0;
   }
@@ -26,4 +27,7 @@
     margin-right: 10px;
     font-size: 12px;
     display: inline;
+    text-align: left;
   }
+
+  
