@@ -1,0 +1,29 @@
+.jumbotron {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: #000;
+  }
+  
+  .jumbotron p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .jumbotron-heading {
+    font-size: 24px;
+  }
+  
+  .jumbotron p {
+    font-size: 14px;
+  }
+  
+  .jumbotron .container {
+    max-width: 40rem;
+  }
+  
+  .jumbotron .social ul li {
+    margin-right: 10px;
+    font-size: 12px;
+    display: inline;
+  }
