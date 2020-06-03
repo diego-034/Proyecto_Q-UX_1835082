@@ -55,7 +55,7 @@
   .left,.center,.right {
     display:inline-block;
     height:300px;
-    float: left;
+    
   }
   .left,.right {
     width:15px;
