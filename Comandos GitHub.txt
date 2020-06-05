@@ -3,3 +3,6 @@ git pull
 git add *
 git commit -m "isset"
 git push origin master
+
+
+cd Desktop\Proyecto\Proyecto_Q-UX_1835082\Q-UX
