@@ -1,134 +1,123 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800");
 
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #000;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
 
-.container{
-   position: relative;   
-   width: 1000px;
-   display:flex;
-   justify-content: space-between;
-   background-color: #000;
+.container {
+  position: relative;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-rows: auto;
+  grid-gap: 0 40px;
 }
-.container .cards{
-    position: relative;
-    width: 300px;
-    height: 400px;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.container .box {
+  position: relative;
+  height: 400px;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #bbbbbb;
 }
-.container .cards:before{
-    position: absolute;
+
+.container .box:before  {
     content: '';
-    top: 0;
-    left: 0;
-    widows: 50%;
-    height: 100%;
-    background: rgba(255,255,255,.1);
-    z-index: 20;
-    pointer-events: none;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: rgb(0, 0, 0);
+  transform: skew(2deg,2deg);
+  z-index: -1;
 }
-.container .cards:nth-child(1){
-    background: linear-gradient(45deg,#3503ad,#f7308c);
+.container .box:nth-child(1):before  {
+    background: linear-gradient(315deg, #ff0057, #e64a19);
 }
-.container .cards:nth-child(1) .overlay{
-    background: linear-gradient(45deg,#3503ad,#f7308c);
+.container .box:nth-child(2):before  {
+    background: linear-gradient(315deg, #e91e63, #5d02ff);
 }
-.container .cards:nth-child(2){
-    background: linear-gradient(45deg,#ccff00,#09afff);
+.container .box:nth-child(3):before  {  
+    background: linear-gradient(315deg, #ff0000, #ffc107);
 }
-.container .cards:nth-child(2) .overlay{
-    background: linear-gradient(45deg,#ccff00,#09afff);
+.container .box:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255,255,255,0.05);
+  pointer-events: none;
 }
-.container .cards:nth-child(3){
-    background: linear-gradient(45deg,#e91e63,#ffeb3d);
-}
-.container .cards:nth-child(3) .overlay{
-    background: linear-gradient(45deg,#e91e63,#ffeb3d);
-}
-.container .cards .imgBx{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
 
+.content {
+  position: relative;
+  padding: 20px;
+  transform: translateY(40px);
 }
-.container .cards .imgBx h2{
-    margin: 10px 0 0;
-    padding: 0;
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-.container .cards .overlay{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,.2);
-    cursor: pointer;
-    border-radius: 50%;
-    transition: 0.5s;
-}
-.container .cards .overlay:hover{
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: none;
-    opacity: 0.9;
-    border-radius: 0;
-}
-.container .cards .overlay:before{
-    content: 'Read';
-    position: absolute;
-    top:0;
-    left: 0;
-    right: 0;
-    bottom:0;
-    color: #fff;
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: 500;
-    letter-spacing: 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition-delay: 0.5s;
-}
-.container .cards .overlay:hover:before{
-    display: none;
-    transition-delay: 0s;
-}
-.container .cards .content{
-    padding:20px;
-    box-sizing: border-box;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transition:0s;
-    color: #fff;
 
+.box .content h2 {
+  position: absolute;
+  top: -60px;
+  right: 20px;
+  margin: 0;
+  padding: 0;
+  font-size: 10em;
+  color: rgba(255, 255, 255, 0.05);
+  transition: 0.5s;
 }
-.container .cards .overlay:hover ~ .content{
-    opacity: 1;
-    visibility: visible;
-    transition:0.2s;
-    transition-delay: 0.5s;
+
+.box:hover .content h2 {
+  top: -140px;
 }
-.container .cards .content h2{
-    margin: 0;
-    padding: 0;
+
+.box .content h3 {
+  margin: 0 0 10px;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 500px;
+  color: #fff;
 }
-.container .cards .content p{
-   font-size: 12px;
+
+.box .content p {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 16px;
+}
+
+.box .content a {
+  position: relative;
+  margin: 20px 0 0;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  color: #fff;
+  transition: 0.5s;
+  transform: translateY(-40px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.box:hover .content a {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.box .content a:hover {
+  color: #000;
+  background: #fff;
 }
