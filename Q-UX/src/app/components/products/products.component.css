@@ -38,7 +38,7 @@ body {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: rgb(0, 0, 0);
+  background: #fff;
   transform: skew(2deg,2deg);
   z-index: -1;
 }

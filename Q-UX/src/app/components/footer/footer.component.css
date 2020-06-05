@@ -4,10 +4,11 @@ footer {
     padding-bottom: 10px;
     width: 100%;
     height: 100px;
-    background-color: #000;    
+    background-color: #000; 
+    color: rgb(18, 206, 164) !important;   
   }
   footer p {
-    font-size: 12px;
+    font-size: 12px;    
   }
   
   footer .social ul li {
