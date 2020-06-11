@@ -23,6 +23,8 @@ class CreateDetallesFacturasTable extends Migration
             $table->string('Talla',4);
             $table->unsignedInteger('IdProducto');
             $table->foreign('IdProducto')->references('IdProducto')->on('productos');
+            $table->unsignedInteger('IdFactura');
+            $table->foreign('IdFactura')->references('IdFactura')->on('facturas');
             $table->timestamps();
         });
     }
