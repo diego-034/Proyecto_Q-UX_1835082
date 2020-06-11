@@ -14,7 +14,13 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $users = Usuario::all();
+       
+        if ($users == null) {
+            return $this->SendError("Error al consultar Usuarios");
+        }
+
+        return $this->SendResponse($users, "Usuarios existentes");
     }
 
     /**
@@ -22,11 +28,7 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
-
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -45,17 +47,6 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Usuario $usuario)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Usuario  $usuario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Usuario $usuario)
     {
         //
     }
