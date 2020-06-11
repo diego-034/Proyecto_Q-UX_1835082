@@ -14,13 +14,13 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $producs = Producto::all();
+        $products = Producto::all();
        
-        if ($producs == null) {
+        if ($products == null) {
             return $this->SendError("Error al consultar los productos");
         }
 
-        return $this->SendResponse($producs, "Productos encontrados");
+        return $this->SendResponse($products, "Productos encontrados");
     }
 
     /**
