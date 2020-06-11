@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class UsuarioController extends Controller
 {
@@ -37,7 +39,23 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'Nombres' => 'required|string',
+            'Apellidos' => 'required|string',
+            'Correo' => 'required|email',
+            'Telefono' => 'required|numeric',
+            'Celular' => 'required|numeric',
+            'NIT' => 'required|integer',
+            'Contrasena'=>'required|string',
+            'Estado'=>'required|boolean'
+        ]);
+        if ($validator->fails()) {
+            return $this->SendError("error de validación", $validator->errors(), 422);
+        }
+        $input = $request->all();
+        $data = Usuario::create($input);
+
+        return $this->SendResponse($data, "ingreso exitoso de producto");
     }
 
     /**
