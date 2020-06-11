@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductoController extends Controller
 {
@@ -31,7 +32,26 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'Nombre' => 'required|string',
+            'Imagen' => 'string',
+            'Descripcion' => 'required|string',
+            'Color' => 'required|string',
+            'Precio' => 'required|numeric',
+            'IVA' => 'required|numeric',
+            'Descuento'=>'required|numeric',
+            'Estado'=>'required|boolean',
+            'TallaS'=>'numeric',
+            'TallaM'=>'numeric',
+            'TallaL'=>'numeric'
+        ]);
+        if ($validator->fails()) {
+            return $this->SendError("error de validación", $validator->errors(), 422);
+        }
+        $input = $request->all();
+        $data = Producto::create($input);
+
+        return $this->SendResponse($data, "ingreso exitoso de producto");
     }
 
     /**

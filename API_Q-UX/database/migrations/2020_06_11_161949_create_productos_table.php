@@ -25,6 +25,7 @@ class CreateProductosTable extends Migration
             $table->integer('TallaS');
             $table->integer('TallaM');
             $table->integer('TallaL');
+            $table->boolean('Estado');
             $table->timestamps();
         });
     }

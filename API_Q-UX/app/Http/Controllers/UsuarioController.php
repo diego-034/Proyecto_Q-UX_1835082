@@ -55,7 +55,7 @@ class UsuarioController extends Controller
         $input = $request->all();
         $data = Usuario::create($input);
 
-        return $this->SendResponse($data, "ingreso exitoso de producto");
+        return $this->SendResponse($data, "ingreso exitoso de usuario");
     }
 
     /**
