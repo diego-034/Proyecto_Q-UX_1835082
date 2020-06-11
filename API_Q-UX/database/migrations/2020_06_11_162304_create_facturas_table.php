@@ -20,7 +20,7 @@ class CreateFacturasTable extends Migration
             $table->decimal('IVATotal',12,2);
             $table->boolean('Estado');
             $table->unsignedInteger('IdCliente');
-            $table->foreign('IdClinete')->references('IdCliente')->on('clientes');
+            $table->foreign('IdCliente')->references('IdCliente')->on('clientes');
             $table->unsignedInteger('IdUsuario');
             $table->foreign('IdUsuario')->references('IdUsuario')->on('usuarios');
             $table->timestamps();
