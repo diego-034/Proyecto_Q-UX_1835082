@@ -14,7 +14,15 @@ class CreateDetallesFacturasTable extends Migration
     public function up()
     {
         Schema::create('detalles_facturas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('IdDetallesFactura');
+            $table->bigInteger('Cantidad');
+            $table->decimal('Total',12,2);
+            $table->decimal('Descuento',12,2);
+            $table->decimal('IVA',12,2);
+            $table->boolean('Estado');
+            $table->string('Talla',4);
+            $table->unsignedInteger('IdProducto');
+            $table->foreign('IdProducto')->references('IdProducto')->on('productos');
             $table->timestamps();
         });
     }
