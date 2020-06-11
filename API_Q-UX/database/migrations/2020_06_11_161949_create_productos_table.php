@@ -20,6 +20,8 @@ class CreateProductosTable extends Migration
             $table->string('Descripcion',300);
             $table->string('Color',10);
             $table->decimal('Precio',12,2);
+            $table->decimal('IVA',12,2);
+            $table->decimal('Descuento',12,2);
             $table->integer('TallaS');
             $table->integer('TallaM');
             $table->integer('TallaL');
