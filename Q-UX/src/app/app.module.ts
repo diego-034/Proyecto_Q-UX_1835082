@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 // Importamos nuestro modulo
 import { ComponentsModule } from './components/components.module';
-
+import{ HttpClientModule} from '@angular/common/http'; 
 // Componentes propios
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,8 @@ import { ProductsComponent } from './pages/products/products.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
   selector: 'app-product',
@@ -7,23 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductComponent {
 
-  constructor() { }
+  constructor(private productsService:ProductsService) { }
 
   ngOnInit(): void {
     
   }
-
-  peticion(){
-    let url = "http://127.0.0.1:8000/api/producto"
-    fetch(url, {
-      method: 'GET'
-  })
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-        },
-        (error) => {}
-      );
+  cargarProductos(){
+    console.log(this.productsService.getProducts());
   }
 }
