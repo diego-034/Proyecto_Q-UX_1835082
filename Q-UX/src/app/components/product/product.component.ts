@@ -7,13 +7,13 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-
-  constructor(private productsService:ProductsService) { }
-
-  ngOnInit(): void {
-    
+  products: any[] = [];
+  constructor(private productsService:ProductsService) { 
+    this.productsService.getProducts()
+    .subscribe((data:any) => {
+      this.products=data.data;
+    })
   }
-  cargarProductos(){
-    console.log(this.productsService.getProducts());
+  ngOnInit(): void {
   }
 }
