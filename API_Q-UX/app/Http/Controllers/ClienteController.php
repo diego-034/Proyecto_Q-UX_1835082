@@ -16,11 +16,9 @@ class ClienteController extends Controller
     public function index()
     {
         $client = Cliente::all();
-       
         if ($client == null) {
             return $this->SendError("Error de consulta de clientes");
         }
-
         return $this->SendResponse($client, "Listado de Clientes");
     }
 
@@ -50,7 +48,7 @@ class ClienteController extends Controller
         $input = $request->all();
         $data = Cliente::create($input);
 
-        return $this->SendResponse($data, "Guardado Exitosamente");
+        return $this->SendResponse($data, "Cliente Guardado Exitosamente");
     }
 
     /**
