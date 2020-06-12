@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Factura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FacturaController extends Controller
 {
@@ -14,7 +15,13 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Factura::all();
+       
+        if ($invoices == null) {
+            return $this->SendError("Error al consultar las facturas");
+        }
+
+        return $this->SendResponse($invoices, "Facturas encontrados");
     }
 
     /**
@@ -25,7 +32,21 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'Total' => 'required|numeric',
+            'DescuentoTotal' => 'required|numeric',
+            'IVATotal' => 'required|numeric',
+            'Estado' => 'required|boolean',
+            'IdCliente' => 'required|string',
+            'IdUsuario'=>'required|numeric'
+        ]);
+        if ($validator->fails()) {
+            return $this->SendError("error de validación", $validator->errors(), 422);
+        }
+        $input = $request->all();
+        $data = Factura::create($input);
+
+        return $this->SendResponse($data, "Guardado Exitosamente");
     }
 
     /**

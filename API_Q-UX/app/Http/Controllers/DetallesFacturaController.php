@@ -18,10 +18,10 @@ class DetallesFacturaController extends Controller
         $products = DetallesFactura::all();
        
         if ($products == null) {
-            return $this->SendError("Error al consultar las facturas");
+            return $this->SendError("Error al consultar los detalles del la factura");
         }
 
-        return $this->SendResponse($products, "Facturas encontrados");
+        return $this->SendResponse($products, "Detalles de la factura encontrados");
     }
 
     /**
