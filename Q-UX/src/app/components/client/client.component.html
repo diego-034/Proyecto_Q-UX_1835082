@@ -1,0 +1,13 @@
+<div class="card-columns">
+    <div *ngFor="let client of clients" class="card">
+        <img src="https://img2.freepng.es/20180719/uit/kisspng-computer-icons-silhouette-clip-art-user-5b50e923646347.3683342815320292194112.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Nombres : {{client.Nombres}}</h5>
+            <h5 class="card-title">Apellidos : {{client.Apellidos}}</h5>
+            <h5 class="card-title">Telefono : {{client.Telefono}}</h5>
+            <p class="card-text">
+                Correo : {{client.Correo}}
+            </p>
+        </div>
+    </div>
+</div>

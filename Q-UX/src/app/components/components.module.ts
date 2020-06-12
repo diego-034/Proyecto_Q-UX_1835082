@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ProductComponent } from './product/product.component';
+import { ClientComponent } from './client/client.component';
 
 
 
@@ -18,14 +19,15 @@ import { ProductComponent } from './product/product.component';
     FooterComponent,
     ContactUsComponent,
     AboutUsComponent,
-    ProductComponent
-  ],
+    ProductComponent,
+    ClientComponent  ],
   exports: [ // esto es para exportar los componentes que aquí tenemos
     NavbarComponent,
     FooterComponent,
     ContactUsComponent,
     AboutUsComponent,
-    ProductComponent
+    ProductComponent,
+    ClientComponent
   ],
   imports: [
     CommonModule,

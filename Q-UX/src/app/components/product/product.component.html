@@ -1,12 +1,12 @@
 <div class="card-columns">
     <div *ngFor="let product of products" class="card">
-        <img [src]="" class="card-img-top" alt="...">
+        <img src="https://dafitistaticco-a.akamaihd.net/p/color-siete-1662-32463-1-product.jpg" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">{{product.Nombre}}</h5>
-            <h5 class="card-title">{{product.Color}}</h5>
-            <h5 class="card-title">${{product.Precio}}</h5>
+            <h5 class="card-title">Nombre: {{product.Nombre}}</h5>
+            <h5 class="card-title">Color: {{product.Color}}</h5>
+            <h5 class="card-title">Precio : ${{product.Precio}}</h5>
             <p class="card-text">
-                {{product.Descripcion}}
+                Descripción : {{product.Descripcion}}
             </p>
         </div>
     </div>
