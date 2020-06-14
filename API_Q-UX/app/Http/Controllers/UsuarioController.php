@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
@@ -17,7 +17,7 @@ class UsuarioController extends Controller
     public function index()
     {
         $users = Usuario::all();
-       
+
         if ($users == null) {
             return $this->SendError("Error al consultar Usuarios");
         }
@@ -30,7 +30,7 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
+
     /**
      * Store a newly created resource in storage.
      *
@@ -46,8 +46,8 @@ class UsuarioController extends Controller
             'Telefono' => 'required|numeric',
             'Celular' => 'required|numeric',
             'NIT' => 'required|integer',
-            'Contrasena'=>'required|string',
-            'Estado'=>'required|boolean'
+            'Contrasena' => 'required|string',
+            'Estado' => 'required|boolean'
         ]);
         if ($validator->fails()) {
             return $this->SendError("error de validación", $validator->errors(), 422);
@@ -90,5 +90,21 @@ class UsuarioController extends Controller
     public function destroy(Usuario $usuario)
     {
         //
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'Correo' => 'required|email',
+            'Contrasena' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            return $this->SendError("error de validación", $validator->errors(), 422);
+        } 
+        $products = DB::table('usuarios')->where('Correo', '=', $request->input('Correo'))->where('Contrasena', '=',  $request->input('Contrasena'))->get();
+        if ($products == null) {
+            return $this->SendError("error de validación", $validator->errors(), 422);
+        }
+        return $this->SendResponse($products, "Logeo exitoso de usuario");
     }
 }
