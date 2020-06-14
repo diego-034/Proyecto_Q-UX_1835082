@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ClientsComponent } from './pages/clients/clients.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ClientsComponent } from './pages/clients/clients.component';
     AppComponent,
     HomeComponent,
     ProductsComponent,
-    ClientsComponent
+    ClientsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

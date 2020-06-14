@@ -4,12 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ClientsComponent } from './pages/clients/clients.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'products', component: ProductsComponent},
   { path: 'clients', component: ClientsComponent},
+  { path: 'login', component: LoginComponent},
+
   { path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 
