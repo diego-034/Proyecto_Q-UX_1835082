@@ -1,5 +1,5 @@
-import { Component, OnInit,Input } from '@angular/core';
-import { FormGroup }        from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +9,13 @@ import { FormGroup }        from '@angular/forms';
 
 export class LoginComponent implements OnInit {
   @Input() form: FormGroup;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  logeo(){
-
+  login(){
+    console.log();
   }
 }
