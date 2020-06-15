@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { LoginService } from 'src/app/services/login/login.service';
+
 
 @Component({
   selector: 'app-login',
@@ -8,14 +9,16 @@ import { FormGroup } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-  @Input() form: FormGroup;
 
-  constructor() { }
+  constructor(private LoginService: LoginService) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    console.log();
+    var email = $("#email").val();
+    var password = $("#password").val();
+    var response = this.LoginService.login(email,password);
+    console.log(response);
   }
 }
