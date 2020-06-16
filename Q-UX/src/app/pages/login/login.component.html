@@ -1,20 +1,94 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-4">
-            <div [formGroup]="form">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Correo</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+<div class="r-main">
+
+    <div *ngIf="boton" class="modal-dialog text-center">
+        <div class="col-sm-8 main-section animated fadeIn fast">
+            <div class="modal-content">
+                <div class="col-12 img-user">
+                    <img class="rounded-circle" src="../../../assets/img/qux.jpg" alt=""> 
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control" [id]="password">
+                <form  class="col-12" [formGroup]="form">
+                    <div class="form-group fgm-gr" id="user-group">
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo">
+                    </div>
+                    <div class="form-group fgm-gr" id="pass-group">
+                        <input type="password" class="form-control" [id]="password"  placeholder="Contraseña"> <!-- -->
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)="login()"><i class="fas fa-sign-in-alt"></i>   Ingresar</button>
+                </form>
+                <div class="col-12 forgot">
+                    <p (click)=" vista = !vista; boton = !boton ">Registrarse</p>
+                    <hr>
+                    <a href="#">Olvide la contraseña</a>
                 </div>
-                <button type="button" class="btn btn-primary" (click)="login()">Submit</button>
             </div>
         </div>
     </div>
-
 </div>
+
+<!--Registro-->
+
+<div *ngIf='vista' class="">
+    <div class="row justify-content-center align-items-center minh-100 animated fadeIn fast" id="div-form">
+        <div class="col-12 user-img text-center">
+            <img class="rounded" src="../../../assets/img/qux.jpg" alt="Logo de Q-UX">
+        </div>
+        <form class="col-sm-12 bg-white rounded p-3 registry">
+            <legend class="d-flex justify-content-between align-items-center">
+                <p>Campos Obligatorios*</p>
+                <i (click)=" vista = !vista; boton = !boton" class="fas fa-times-circle"></i>
+            </legend>
+            <div class="form-row">
+                <div class="form-group col-md-4 inputs">
+                    <label for="nombres">Nombres</label>
+                    <input type="text" class="form-control" id="nombres" placeholder="Nombre">
+                </div>
+                <div class="form-group col-md-4 inputs">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" class="form-control" id="apellidos" placeholder="Apellido">
+                </div>
+                <div class="form-group col-md-4 inputs">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" placeholder=" Teléfono: 000 12 34">
+                </div>
+            </div>
+    
+            <div class="form-row">
+                <div class="form-group col-md-4 inputs">
+                    <label for="celular">Celular</label>
+                    <input type="tel" class="form-control" id="celular" placeholder="Celular: 000 123 5678">
+                </div>
+                <div class="form-group col-md-4 inputs">
+                    <label for="direccion">Direccion</label>
+                    <input type="text" class="form-control" id="direccion" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="form-group col-md-4 inputs">
+                    <label for="tipoDoc">Tipo de Documento</label>
+                    <select id="tipoDoc" class="form-control">
+                        <option selected disabled selected>Tipo de documento *</option>
+                        <option value="Cedula de Ciudadania">Cédula de Ciudadania</option>
+                        <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="form-row">
+                <div class="form-group col-md-3 inputs">
+                    <label for="numeroDoc">N° de Documento</label>
+                    <input type="number" class="form-control" id="numeroDoc" placeholder="Número de Documento">
+                </div>
+                <div class="form-group col-md-5 inputs">
+                    <label for="e-mail">Correo</label>
+                    <input type="text" class="form-control" id="e-mail" placeholder="E-mail">
+                </div>
+                <div class="form-group col-md-4 inputs">
+                    <label for="inputPassword">Contraseña</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                </div>
+            </div>
+            <div class="col-12 d-flex  justify-content-end">
+                <button type="submit" class="btn btn-primary col-md-2 d-block mx-auto">Registrarse</button>
+            </div>
+        </form>
+    </div>
+</div>
+

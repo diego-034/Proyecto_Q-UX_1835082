@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    var email = $("#email").val();
-    var password = $("#password").val();
+    var email = document.querySelector("#email").nodeValue,
+        password = document.querySelector("#password").nodeValue;
     var response = this.LoginService.login(email,password);
     console.log(response);
   }
