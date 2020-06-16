@@ -10,6 +10,9 @@ import { LoginService } from 'src/app/services/login/login.service';
 
 export class LoginComponent implements OnInit {
 
+  vista = false;
+  boton = true;
+  
   constructor(private LoginService: LoginService) { }
 
   ngOnInit(): void {
