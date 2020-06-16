@@ -6,12 +6,12 @@
                 <div class="col-12 img-user">
                     <img class="rounded-circle" src="../../../assets/img/qux.jpg" alt=""> 
                 </div>
-                <form  class="col-12" [formGroup]="form">
+                <form  class="col-12"    >
                     <div class="form-group fgm-gr" id="user-group">
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo">
                     </div>
                     <div class="form-group fgm-gr" id="pass-group">
-                        <input type="password" class="form-control" [id]="password"  placeholder="Contraseña"> <!-- -->
+                        <input type="password" class="form-control"   placeholder="Contraseña"> <!--[formGroup]="form"  [id]="password" -->
                     </div>
                     <button type="submit" class="btn btn-primary" (click)="login()"><i class="fas fa-sign-in-alt"></i>   Ingresar</button>
                 </form>
