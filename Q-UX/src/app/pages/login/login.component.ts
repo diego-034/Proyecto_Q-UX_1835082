@@ -10,6 +10,9 @@ declare var $: any;
 
 export class LoginComponent implements OnInit {
 
+  vista = false; /* Se encarga de mostrarmos y ocultarnos el formulario, iagual el de boton */
+  boton = true;
+
   constructor(private LoginService: LoginService) { }
 
   ngOnInit(): void {
