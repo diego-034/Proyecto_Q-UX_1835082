@@ -18,10 +18,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){
+  login() {
     var email = $("#email").val();
     var password = $("#password").val();
-    var response = this.LoginService.login(email,password);
-    console.log(response);
+    this.LoginService.login(email, password)
+      .subscribe((data: any) => {
+        if (data.success) {
+          alert(data.message)
+        } else {
+          alert(data.error)
+        }
+      })
+
   }
 }

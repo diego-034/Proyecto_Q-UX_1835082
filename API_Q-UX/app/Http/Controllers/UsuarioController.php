@@ -102,8 +102,8 @@ class UsuarioController extends Controller
             return $this->SendError("error de validación", $validator->errors(), 422);
         } 
         $products = DB::table('usuarios')->where('Correo', '=', $request->input('Correo'))->where('Contrasena', '=',  $request->input('Contrasena'))->get();
-        if ($products == null) {
-            return $this->SendError("error de validación", $validator->errors(), 422);
+        if ($products->isEmpty()) {
+            return $this->SendResponse(null, "Revise el usuario y la contraseña e intente de nuevo");
         }
         return $this->SendResponse($products, "Logeo exitoso de usuario");
     }

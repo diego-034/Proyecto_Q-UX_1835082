@@ -4,16 +4,16 @@
         <div class="col-sm-8 main-section animated fadeIn fast">
             <div class="modal-content">
                 <div class="col-12 img-user">
-                    <img class="rounded-circle" src="../../../assets/img/qux.jpg" alt=""> 
+                    <img class="rounded-circle" src="../../../assets/img/qux.jpg" alt="">
                 </div>
-                <form  class="col-12">
+                <form class="col-12">
                     <div class="form-group fgm-gr" id="user-group">
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo">
                     </div>
                     <div class="form-group fgm-gr" id="pass-group">
-                        <input type="password" class="form-control" placeholder="Contraseña"> 
+                        <input type="password" id="password" class="form-control" placeholder="Contraseña">
                     </div>
-                    <button type="submit" class="btn btn-primary" (click)="login()"><i class="fas fa-sign-in-alt"></i>   Ingresar</button>
+                    <button type="button" class="btn btn-primary" (click)="login()"><i class="fas fa-sign-in-alt"></i>   Ingresar</button>
                 </form>
                 <div class="col-12 forgot">
                     <p (click)=" vista = !vista; boton = !boton ">Registrarse</p>
@@ -51,7 +51,7 @@
                     <input type="tel" class="form-control" id="telefono" placeholder=" Teléfono: 000 12 34">
                 </div>
             </div>
-    
+
             <div class="form-row">
                 <div class="form-group col-md-4 inputs">
                     <label for="celular">Celular</label>
@@ -70,7 +70,7 @@
                     </select>
                 </div>
             </div>
-    
+
             <div class="form-row">
                 <div class="form-group col-md-3 inputs">
                     <label for="numeroDoc">N° de Documento</label>
@@ -91,4 +91,3 @@
         </form>
     </div>
 </div>
-
