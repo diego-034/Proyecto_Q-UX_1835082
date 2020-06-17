@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="r-main">
 
     <div *ngIf="boton" class="modal-dialog text-center">
@@ -6,12 +7,12 @@
                 <div class="col-12 img-user">
                     <img class="rounded-circle" src="../../../assets/img/qux.jpg" alt=""> 
                 </div>
-                <form  class="col-12" [formGroup]="form">
+                <form  class="col-12">
                     <div class="form-group fgm-gr" id="user-group">
                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo">
                     </div>
                     <div class="form-group fgm-gr" id="pass-group">
-                        <input type="password" class="form-control" [id]="password"  placeholder="Contraseña"> <!--  -->
+                        <input type="password" class="form-control" placeholder="Contraseña"> 
                     </div>
                     <button type="submit" class="btn btn-primary" (click)="login()"><i class="fas fa-sign-in-alt"></i>   Ingresar</button>
                 </form>
@@ -19,6 +20,21 @@
                     <p (click)=" vista = !vista; boton = !boton ">Registrarse</p>
                     <hr>
                     <a href="#">Olvide la contraseña</a>
+=======
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+            <div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Correo</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Contraseña</label>
+                    <input type="password" class="form-control">
+>>>>>>> 006d57236d08b22b7baf6b0edec7981a9378073d
                 </div>
             </div>
         </div>

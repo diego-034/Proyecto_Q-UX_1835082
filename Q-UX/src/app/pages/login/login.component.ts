@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
-
+declare var $: any;
 
 @Component({
   selector: 'app-login',
