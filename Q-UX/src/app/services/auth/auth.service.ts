@@ -11,6 +11,6 @@ export class AuthService implements CanActivate{
   constructor() { }
 
   canActivate(){
-    return true
+    return false
   }
 }

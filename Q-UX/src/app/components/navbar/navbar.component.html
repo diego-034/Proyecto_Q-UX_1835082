@@ -12,7 +12,7 @@
             <li class="nav-item" routerLinkActive="activate" *ngIf='auth.canActivate()'>
                 <a class="nav-link" routerLink="products">Productos</a>
             </li>
-            <li class="nav-item" routerLinkActive="activate">
+            <li class="nav-item" routerLinkActive="activate" *ngIf='auth.canActivate()'>
                 <a class="nav-link" routerLink="clients">Clientes</a>
             </li>
             <li class="nav-item" routerLinkActive="activate">

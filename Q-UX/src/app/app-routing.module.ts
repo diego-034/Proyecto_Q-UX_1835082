@@ -12,7 +12,7 @@ import {AuthService} from '../app/services/auth/auth.service';
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'products', component: ProductsComponent, canActivate:[AuthService]},
-  { path: 'clients', component: ClientsComponent},
+  { path: 'clients', component: ClientsComponent,  canActivate:[AuthService]},
   { path: 'login', component: LoginComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
