@@ -20,6 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->string('Correo',70);
             $table->string('Telefono',13);
             $table->string('Celular',13);
+            $table->string('Token',50);
             $table->string('NIT',50);
             $table->string('Contrasena',120);
             $table->boolean('Estado');
