@@ -54,7 +54,16 @@ class UsuarioController extends Controller
             return $this->SendError("error de validación", $validator->errors(), 422);
         }
         $input = $request->all();
-        $token = Str::random(40);
+
+        $flag = false;
+        do {
+            $token = Str::random(40);
+            $tokenDb = DB::table('usuarios')->where('Token', '=', $token)->get();
+            if ($tokenDb == null) {
+                $flag = true; 
+            }
+        } while ($flag);
+
         $input['Token'] = $token;
         $data = Usuario::create($input);
 
@@ -103,7 +112,7 @@ class UsuarioController extends Controller
         ]);
         if ($validator->fails()) {
             return $this->SendError("error de validación", $validator->errors(), 422);
-        } 
+        }
         $products = DB::table('usuarios')->where('Correo', '=', $request->input('Correo'))->where('Contrasena', '=',  $request->input('Contrasena'))->get();
         if ($products->isEmpty()) {
             return $this->SendResponse(null, "Revise el usuario y la contraseña e intente de nuevo");
