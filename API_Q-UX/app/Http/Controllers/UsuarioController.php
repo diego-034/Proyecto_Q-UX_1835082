@@ -6,6 +6,7 @@ use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
 {
@@ -53,6 +54,8 @@ class UsuarioController extends Controller
             return $this->SendError("error de validación", $validator->errors(), 422);
         }
         $input = $request->all();
+        $token = Str::random(40);
+        $input['Token'] = $token;
         $data = Usuario::create($input);
 
         return $this->SendResponse($data, "ingreso exitoso de usuario");
