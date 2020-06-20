@@ -7,7 +7,6 @@ import { ClientsComponent } from './pages/clients/clients.component';
 import { LoginComponent } from './pages/login/login.component';
 //Servicios
 import {AuthService} from '../app/services/auth/auth.service';
-import { ClientComponent } from './components/client/client.component';
 
 
 const routes: Routes = [
@@ -21,7 +20,7 @@ const routes: Routes = [
        },
        {
          path: 'clients',
-         component: ClientComponent,  // another child route component that the router renders
+         component: ClientsComponent,  // another child route component that the router renders
        }
      ], canActivate:[AuthService] },
   { path: 'login', component: LoginComponent},

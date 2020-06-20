@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           this.Router.navigate(['/login']);
           return
         }
-        this.Router.navigate(['/home']);
+        this.Router.navigate(['/admin/home']);
         this.AuthService.setCookie(data.data[0].Token)
       })
   }
