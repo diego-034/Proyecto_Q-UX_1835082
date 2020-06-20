@@ -3,10 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 // Paginas a las que redirigimos
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { ClientsComponent } from './pages/clients/clients.component';
+import { ClientsComponent } from './pages/admin/clients/clients.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
 //Servicios
 import {AuthService} from '../app/services/auth/auth.service';
+
+
+
 
 
 const routes: Routes = [
@@ -16,7 +20,7 @@ const routes: Routes = [
      children: [
        {
          path: 'home', // child route path
-         component: HomeComponent // child route component that the router renders
+         component: MyHomeComponent, // child route component that the router renders
        },
        {
          path: 'clients',

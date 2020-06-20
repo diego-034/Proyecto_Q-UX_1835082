@@ -11,8 +11,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { ClientsComponent } from './pages/clients/clients.component';
+import { ClientsComponent } from './pages/admin/clients/clients.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { LoginComponent } from './pages/login/login.component';
     HomeComponent,
     ProductsComponent,
     ClientsComponent,
-    LoginComponent
+    LoginComponent,
+    MyHomeComponent
   ],
   imports: [
     BrowserModule,
