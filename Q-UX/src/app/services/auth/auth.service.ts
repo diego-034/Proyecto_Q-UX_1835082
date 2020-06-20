@@ -16,17 +16,18 @@ export class AuthService implements CanActivate{
   }
 
   getCookie() {
-    var token = this.CookieService.check('Token-TKN');
-    if(!token) {
-      return false
-    }
-    return true
+    return this.CookieService.check('Token-TKN')
   }
 
   setCookie(token = null){ 
     if(token == null) {
       return
     }
-   this.CookieService.set('Token-TKN', token);
+   this.CookieService.set('Token-TKN', token)
+  }
+
+  destroySesion() {
+    this.CookieService.delete('Token-TKN')
+    return this.CookieService.check('Token-TKN')
   }
 }

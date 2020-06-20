@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-
 import { Router } from '@angular/router';
+
 declare var $: any;
 
 @Component({
