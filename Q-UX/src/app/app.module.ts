@@ -14,6 +14,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ClientsComponent } from './pages/admin/clients/clients.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
+import { MyClientsComponent } from './pages/admin/my-clients/my-clients.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
     ProductsComponent,
     ClientsComponent,
     LoginComponent,
-    MyHomeComponent
+    MyHomeComponent,
+    MyClientsComponent
   ],
   imports: [
     BrowserModule,
