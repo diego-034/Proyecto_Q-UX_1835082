@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+
 import { Router } from '@angular/router';
 declare var $: any;
 
@@ -14,7 +16,9 @@ export class LoginComponent implements OnInit {
   vista = false; /* Se encarga de mostrarmos y ocultarnos el formulario, iagual el de boton */
   boton = true;
 
-  constructor(private LoginService: LoginService, private router: Router) { }
+  constructor(private LoginService: LoginService,
+              private Router: Router,
+              private AuthService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -24,17 +28,13 @@ export class LoginComponent implements OnInit {
     var password = $("#password").val();
     this.LoginService.login(email, password)
       .subscribe((data: any) => {
-        if (data.success) {
-          alert(data.message)
-          if (!data.data[0].Estado) {
-            this.router.navigate(['/login']);
-          }
-          this.router.navigate(['/home']);
-
-        } else {
-          alert(data.error)
+        alert(data.message)
+        if (!data.data[0].Estado) {
+          this.Router.navigate(['/login']);
+          return
         }
+        this.Router.navigate(['/home']);
+        this.AuthService.setCookie(data.data[0].Token)
       })
-
   }
 }

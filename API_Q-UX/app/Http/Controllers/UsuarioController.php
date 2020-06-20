@@ -113,10 +113,10 @@ class UsuarioController extends Controller
         if ($validator->fails()) {
             return $this->SendError("error de validación", $validator->errors(), 422);
         }
-        $products = DB::table('usuarios')->where('Correo', '=', $request->input('Correo'))->where('Contrasena', '=',  $request->input('Contrasena'))->get();
-        if ($products->isEmpty()) {
+        $user = DB::table('usuarios')->select('Token','Estado')->where('Correo', '=', $request->input('Correo'))->where('Contrasena', '=',  $request->input('Contrasena'))->get();
+        if ($user->isEmpty()) {
             return $this->SendResponse(null, "Revise el usuario y la contraseña e intente de nuevo");
         }
-        return $this->SendResponse($products, "Logeo exitoso de usuario");
+        return $this->SendResponse($user, "Logeo exitoso de usuario");
     }
 }

@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 
 // Importamos nuestro modulo
 import { ComponentsModule } from './components/components.module';
-import{ HttpClientModule} from '@angular/common/http'; 
+import{ HttpClientModule} from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 // Componentes propios
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +29,9 @@ import { LoginComponent } from './pages/login/login.component';
     ComponentsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -25,8 +25,7 @@ const routes: Routes = [
        }
      ], canActivate:[AuthService] },
   { path: 'login', component: LoginComponent},
-  { path: '**', pathMatch: 'full', redirectTo: 'home'},
-  { path: '',   redirectTo: 'home', pathMatch: 'full' }
+  { path: '**',   redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
