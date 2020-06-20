@@ -15,7 +15,7 @@ import { ClientsComponent } from './pages/admin/clients/clients.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
 import { MyClientsComponent } from './pages/admin/my-clients/my-clients.component';
-import { MyProducsComponent } from './pages/admin/my-producs/my-producs.component';
+import { MyProductsComponent } from './pages/admin/my-products/my-products.component';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { MyProducsComponent } from './pages/admin/my-producs/my-producs.componen
     LoginComponent,
     MyHomeComponent,
     MyClientsComponent,
-    MyProducsComponent
+    MyProductsComponent
   ],
   imports: [
     BrowserModule,
