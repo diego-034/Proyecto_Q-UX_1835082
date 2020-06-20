@@ -15,6 +15,7 @@ import { ClientsComponent } from './pages/admin/clients/clients.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
 import { MyClientsComponent } from './pages/admin/my-clients/my-clients.component';
+import { MyProducsComponent } from './pages/admin/my-producs/my-producs.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MyClientsComponent } from './pages/admin/my-clients/my-clients.componen
     ClientsComponent,
     LoginComponent,
     MyHomeComponent,
-    MyClientsComponent
+    MyClientsComponent,
+    MyProducsComponent
   ],
   imports: [
     BrowserModule,
