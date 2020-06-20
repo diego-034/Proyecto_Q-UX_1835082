@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { ClientsComponent } from './pages/admin/clients/clients.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
 import { MyClientsComponent } from './pages/admin/my-clients/my-clients.component';
@@ -23,7 +22,6 @@ import { MyProductsComponent } from './pages/admin/my-products/my-products.compo
     AppComponent,
     HomeComponent,
     ProductsComponent,
-    ClientsComponent,
     LoginComponent,
     MyHomeComponent,
     MyClientsComponent,

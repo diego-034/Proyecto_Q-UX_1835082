@@ -3,9 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 // Paginas a las que redirigimos
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { ClientsComponent } from './pages/admin/clients/clients.component';
+
 import { LoginComponent } from './pages/login/login.component';
+import { MyClientsComponent } from './pages/admin/my-clients/my-clients.component';
 import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
+import { MyProductsComponent } from './pages/admin/my-products/my-products.component';
+
 //Servicios
 import {AuthService} from '../app/services/auth/auth.service';
 
@@ -24,8 +27,12 @@ const routes: Routes = [
        },
        {
          path: 'clients',
-         component: ClientsComponent,  // another child route component that the router renders
-       }
+         component: MyClientsComponent,  // another child route component that the router renders
+       },
+       {
+        path: 'products', // child route path
+        component: MyProductsComponent, // child route component that the router renders
+      }
      ], canActivate:[AuthService] },
   { path: 'login', component: LoginComponent},
   { path: '**',   redirectTo: 'home', pathMatch: 'full' }
