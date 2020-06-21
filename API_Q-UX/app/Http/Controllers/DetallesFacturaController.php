@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\DetallesFactura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,13 +16,17 @@ class DetallesFacturaController extends Controller
      */
     public function index()
     {
-        $products = DetallesFactura::all();
-       
-        if ($products == null) {
-            return $this->SendError("Error al consultar los detalles del la factura");
-        }
+        try {
+            $products = DetallesFactura::all();
 
-        return $this->SendResponse($products, "Detalles de la factura encontrados");
+            if ($products == null) {
+                return $this->SendError("Error al consultar los detalles del la factura");
+            }
+
+            return $this->SendResponse($products, "Detalles de la factura encontrados");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 
     /**
@@ -32,23 +37,27 @@ class DetallesFacturaController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'Cantidad' => 'required|numeric',
-            'Total' => 'required|numeric',
-            'Descuento' => 'required|numeric',
-            'IVA' => 'required|numeric',
-            'Estado' => 'required|boolean',
-            'Talla' => 'required|string',
-            'IdProducto'=>'required|numeric',
-            'IdFactura'=>'required|numeric'
-        ]);
-        if ($validator->fails()) {
-            return $this->SendError("error de validación", $validator->errors(), 422);
-        }
-        $input = $request->all();
-        $data = DetallesFactura::create($input);
+        try {
+            $validator = Validator::make($request->all(), [
+                'Cantidad' => 'required|numeric',
+                'Total' => 'required|numeric',
+                'Descuento' => 'required|numeric',
+                'IVA' => 'required|numeric',
+                'Estado' => 'required|boolean',
+                'Talla' => 'required|string',
+                'IdProducto' => 'required|numeric',
+                'IdFactura' => 'required|numeric'
+            ]);
+            if ($validator->fails()) {
+                return $this->SendError("error de validación", $validator->errors(), 422);
+            }
+            $input = $request->all();
+            $data = DetallesFactura::create($input);
 
-        return $this->SendResponse($data, "Guardado Exitosamente");
+            return $this->SendResponse($data, "Guardado Exitosamente");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 
     /**

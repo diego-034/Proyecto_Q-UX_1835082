@@ -24,6 +24,7 @@ class CreateClientesTable extends Migration
             $table->string('TipoDocumento',10);
             $table->string('NumeroDocumento',14);
             $table->string('Contrasena',120);
+            $table->string('Token',50);
             $table->boolean('Estado');
             $table->timestamps();
         });

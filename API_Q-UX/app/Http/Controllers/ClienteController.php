@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ClienteController extends Controller
 {
@@ -15,11 +18,15 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $client = Cliente::all();
-        if ($client == null) {
-            return $this->SendError("Error de consulta de clientes");
+        try {
+            $client = Cliente::all();
+            if ($client == null) {
+                return $this->SendError("Error de consulta de clientes");
+            }
+            return $this->SendResponse($client, "Listado de Clientes");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
         }
-        return $this->SendResponse($client, "Listado de Clientes");
     }
 
     /**
@@ -30,25 +37,39 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'Nombres' => 'required|string',
-            'Apellidos' => 'required|string',
-            'Correo' => 'required|string',
-            'Telefono' => 'required|string',
-            'Celular' => 'required|string',
-            'Direccion' => 'required|string',
-            'TipoDocumento'=>'required|string',
-            'NumeroDocumento'=>'required|string',
-            'Contrasena'=> 'required|string',
-            'Estado'=> 'required|boolean'
-        ]);
-        if ($validator->fails()) {
-            return $this->SendError("error de validación", $validator->errors(), 422);
-        }
-        $input = $request->all();
-        $data = Cliente::create($input);
+        try {
+            $validator = Validator::make($request->all(), [
+                'Nombres' => 'required|string',
+                'Apellidos' => 'required|string',
+                'Correo' => 'required|string',
+                'Telefono' => 'required|string',
+                'Celular' => 'required|string',
+                'Direccion' => 'required|string',
+                'TipoDocumento' => 'required|string',
+                'NumeroDocumento' => 'required|string',
+                'Contrasena' => 'required|string',
+                'Estado' => 'required|boolean'
+            ]);
+            if ($validator->fails()) {
+                return $this->SendError("error de validación", $validator->errors(), 422);
+            }
+            $input = $request->all();
+            $flag = false;
+            do {
+                $token = Str::random(40);
+                $tokenDb = DB::table('clientes')->where('Token', '=', $token)->get();
+                if ($tokenDb == null) {
+                    $flag = true;
+                }
+            } while ($flag);
 
-        return $this->SendResponse($data, "Cliente Guardado Exitosamente");
+            $input['Token'] = $token;
+            $data = Cliente::create($input);
+
+            return $this->SendResponse($data, "Cliente Guardado Exitosamente");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 
     /**

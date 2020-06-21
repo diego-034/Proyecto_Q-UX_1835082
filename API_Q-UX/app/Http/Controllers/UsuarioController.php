@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Usuario;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -17,13 +18,17 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $users = Usuario::all();
+        try {
+            $users = Usuario::all();
 
-        if ($users == null) {
-            return $this->SendError("Error al consultar Usuarios");
+            if ($users == null) {
+                return $this->SendError("Error al consultar Usuarios");
+            }
+
+            return $this->SendResponse($users, "Usuarios existentes");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
         }
-
-        return $this->SendResponse($users, "Usuarios existentes");
     }
 
     /**
@@ -40,34 +45,38 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'Nombres' => 'required|string',
-            'Apellidos' => 'required|string',
-            'Correo' => 'required|email',
-            'Telefono' => 'required|numeric',
-            'Celular' => 'required|numeric',
-            'NIT' => 'required|integer',
-            'Contrasena' => 'required|string',
-            'Estado' => 'required|boolean'
-        ]);
-        if ($validator->fails()) {
-            return $this->SendError("error de validación", $validator->errors(), 422);
-        }
-        $input = $request->all();
-
-        $flag = false;
-        do {
-            $token = Str::random(40);
-            $tokenDb = DB::table('usuarios')->where('Token', '=', $token)->get();
-            if ($tokenDb == null) {
-                $flag = true; 
+        try {
+            $validator = Validator::make($request->all(), [
+                'Nombres' => 'required|string',
+                'Apellidos' => 'required|string',
+                'Correo' => 'required|email',
+                'Telefono' => 'required|numeric',
+                'Celular' => 'required|numeric',
+                'NIT' => 'required|integer',
+                'Contrasena' => 'required|string',
+                'Estado' => 'required|boolean'
+            ]);
+            if ($validator->fails()) {
+                return $this->SendError("error de validación", $validator->errors(), 422);
             }
-        } while ($flag);
+            $input = $request->all();
 
-        $input['Token'] = $token;
-        $data = Usuario::create($input);
+            $flag = false;
+            do {
+                $token = Str::random(40);
+                $tokenDb = DB::table('usuarios')->where('Token', '=', $token)->get();
+                if ($tokenDb == null) {
+                    $flag = true;
+                }
+            } while ($flag);
 
-        return $this->SendResponse($data, "ingreso exitoso de usuario");
+            $input['Token'] = $token;
+            $data = Usuario::create($input);
+
+            return $this->SendResponse($data, "ingreso exitoso de usuario");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 
     /**
@@ -102,21 +111,5 @@ class UsuarioController extends Controller
     public function destroy(Usuario $usuario)
     {
         //
-    }
-
-    public function login(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'Correo' => 'required|email',
-            'Contrasena' => 'required|string'
-        ]);
-        if ($validator->fails()) {
-            return $this->SendError("error de validación", $validator->errors(), 422);
-        }
-        $user = DB::table('usuarios')->select('Token','Estado')->where('Correo', '=', $request->input('Correo'))->where('Contrasena', '=',  $request->input('Contrasena'))->get();
-        if ($user->isEmpty()) {
-            return $this->SendResponse(null, "Revise el usuario y la contraseña e intente de nuevo");
-        }
-        return $this->SendResponse($user, "Logeo exitoso de usuario");
     }
 }
