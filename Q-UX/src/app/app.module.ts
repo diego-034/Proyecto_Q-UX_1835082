@@ -15,7 +15,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
 import { MyClientsComponent } from './pages/admin/my-clients/my-clients.component';
 import { MyProductsComponent } from './pages/admin/my-products/my-products.component';
-import { FormComponent } from './component/form/form.component';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { FormComponent } from './component/form/form.component';
     MyHomeComponent,
     MyClientsComponent,
     MyProductsComponent,
-    FormComponent
   ],
   imports: [
     BrowserModule,
