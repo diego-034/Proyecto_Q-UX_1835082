@@ -19,10 +19,13 @@ class ClienteController extends Controller
     public function index()
     {
         try {
+
             $client = Cliente::all();
+
             if ($client == null) {
                 return $this->SendError("Error de consulta de clientes");
             }
+
             return $this->SendResponse($client, "Listado de Clientes");
         } catch (Exception $ex) {
             return $this->SendError($ex->__toString());
@@ -38,6 +41,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         try {
+
             $validator = Validator::make($request->all(), [
                 'Nombres' => 'required|string',
                 'Apellidos' => 'required|string',
@@ -50,20 +54,27 @@ class ClienteController extends Controller
                 'Contrasena' => 'required|string',
                 'Estado' => 'required|boolean'
             ]);
+
             if ($validator->fails()) {
                 return $this->SendError("error de validación", $validator->errors(), 422);
             }
+
             $input = $request->all();
+
             $flag = false;
+
             do {
                 $token = Str::random(40);
+
                 $tokenDb = DB::table('clientes')->where('Token', '=', $token)->get();
+
                 if ($tokenDb == null) {
                     $flag = true;
                 }
             } while ($flag);
 
             $input['Token'] = $token;
+
             $data = Cliente::create($input);
 
             return $this->SendResponse($data, "Cliente Guardado Exitosamente");

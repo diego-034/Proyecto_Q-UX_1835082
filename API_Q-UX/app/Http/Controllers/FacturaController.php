@@ -17,6 +17,7 @@ class FacturaController extends Controller
     public function index()
     {
         try {
+
             $invoices = Factura::all();
 
             if ($invoices == null) {
@@ -38,6 +39,7 @@ class FacturaController extends Controller
     public function store(Request $request)
     {
         try {
+
             $validator = Validator::make($request->all(), [
                 'Total' => 'required|numeric',
                 'DescuentoTotal' => 'required|numeric',
@@ -46,10 +48,13 @@ class FacturaController extends Controller
                 'IdCliente' => 'required|string',
                 'IdUsuario' => 'required|numeric'
             ]);
+
             if ($validator->fails()) {
                 return $this->SendError("error de validación", $validator->errors(), 422);
             }
+
             $input = $request->all();
+            
             $data = Factura::create($input);
 
             return $this->SendResponse($data, "Guardado Exitosamente");

@@ -19,6 +19,7 @@ class UsuarioController extends Controller
     public function index()
     {
         try {
+
             $users = Usuario::all();
 
             if ($users == null) {
@@ -46,6 +47,7 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         try {
+
             $validator = Validator::make($request->all(), [
                 'Nombres' => 'required|string',
                 'Apellidos' => 'required|string',
@@ -56,21 +58,27 @@ class UsuarioController extends Controller
                 'Contrasena' => 'required|string',
                 'Estado' => 'required|boolean'
             ]);
+
             if ($validator->fails()) {
                 return $this->SendError("error de validación", $validator->errors(), 422);
             }
+
             $input = $request->all();
 
             $flag = false;
+
             do {
                 $token = Str::random(40);
+
                 $tokenDb = DB::table('usuarios')->where('Token', '=', $token)->get();
+
                 if ($tokenDb == null) {
                     $flag = true;
                 }
             } while ($flag);
 
             $input['Token'] = $token;
+
             $data = Usuario::create($input);
 
             return $this->SendResponse($data, "ingreso exitoso de usuario");

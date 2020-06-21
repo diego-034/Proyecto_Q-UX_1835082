@@ -17,6 +17,7 @@ class DetallesFacturaController extends Controller
     public function index()
     {
         try {
+
             $products = DetallesFactura::all();
 
             if ($products == null) {
@@ -38,6 +39,7 @@ class DetallesFacturaController extends Controller
     public function store(Request $request)
     {
         try {
+
             $validator = Validator::make($request->all(), [
                 'Cantidad' => 'required|numeric',
                 'Total' => 'required|numeric',
@@ -48,10 +50,13 @@ class DetallesFacturaController extends Controller
                 'IdProducto' => 'required|numeric',
                 'IdFactura' => 'required|numeric'
             ]);
+
             if ($validator->fails()) {
                 return $this->SendError("error de validación", $validator->errors(), 422);
             }
+
             $input = $request->all();
+            
             $data = DetallesFactura::create($input);
 
             return $this->SendResponse($data, "Guardado Exitosamente");

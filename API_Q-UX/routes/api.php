@@ -18,12 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 */
-
+//Rutas de api Route::apiResource('Ruta','Controlador');
 Route::apiResource('cliente','ClienteController');
 Route::apiResource('delallesFactura','DetallesFacturaController');
 Route::apiResource('factura','FacturaController');
 Route::apiResource('producto','ProductoController');
 Route::apiResource('usuario','UsuarioController');
-Route::post('usuario/login','Login@login');
+//Rutas especiales
+Route::post('login','Login@login');
 
 

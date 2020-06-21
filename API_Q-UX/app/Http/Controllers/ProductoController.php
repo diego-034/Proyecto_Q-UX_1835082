@@ -17,6 +17,7 @@ class ProductoController extends Controller
     public function index()
     {
         try {
+
             $products = Producto::all();
 
             if ($products == null) {
@@ -38,6 +39,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         try {
+
             $validator = Validator::make($request->all(), [
                 'Nombre' => 'required|string',
                 'Imagen' => 'string',
@@ -51,10 +53,13 @@ class ProductoController extends Controller
                 'TallaM' => 'numeric',
                 'TallaL' => 'numeric'
             ]);
+
             if ($validator->fails()) {
                 return $this->SendError("error de validación", $validator->errors(), 422);
             }
+
             $input = $request->all();
+            
             $data = Producto::create($input);
 
             return $this->SendResponse($data, "ingreso exitoso de producto");
