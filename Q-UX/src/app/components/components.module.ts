@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductComponent } from './product/product.component';
 import { ClientComponent } from './client/client.component';
+import { FormComponent } from './form/form.component';
 
 
 
@@ -16,7 +17,8 @@ import { ClientComponent } from './client/client.component';
     NavbarComponent,
     FooterComponent,
     ProductComponent,
-    ClientComponent  ],
+    ClientComponent,
+    FormComponent  ],
   exports: [ // esto es para exportar los componentes que aquí tenemos
     NavbarComponent,
     FooterComponent,

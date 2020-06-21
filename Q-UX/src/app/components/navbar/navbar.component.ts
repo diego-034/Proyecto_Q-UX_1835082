@@ -9,21 +9,33 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   constructor(private AuthService: AuthService,
-              private Router: Router) { }
+    private Router: Router) { }
 
   ngOnInit(): void {
   }
 
   canActivate() {
-    return this.AuthService.canActivate()
+    try {
+
+      return this.AuthService.canActivate()
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   destroySesion() {
-    var destroy = this.AuthService.destroySesion();
-    if(destroy) {
-      alert("Ocurrio un error")
-      return
+    try {
+
+      var destroy = this.AuthService.destroySesion();
+
+      if (destroy) {
+        alert("Ocurrio un error")
+        return
+      }
+
+      this.Router.navigate(['/home']);
+    } catch (error) {
+      console.log(error)
     }
-    this.Router.navigate(['/home']);
   }
 }

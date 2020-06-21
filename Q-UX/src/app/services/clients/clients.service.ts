@@ -9,6 +9,10 @@ export class ClientsService {
   constructor(private http: HttpClient) { }
 
   getClientes() {
-    return this.http.get(`http://127.0.0.1:8000/api/cliente`);
+    try {
+      return this.http.get(`http://127.0.0.1:8000/api/cliente`);
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

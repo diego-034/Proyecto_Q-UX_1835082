@@ -8,14 +8,21 @@ import { ClientsService } from 'src/app/services/clients/clients.service';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
+
   clients: any[] = [];
-  constructor(private clientsService:ClientsService) { 
-    this.clientsService.getClientes()
-    .subscribe((data:any) => {
-      console.log(data.data)
-      this.clients=data.data;
-    })
+
+  constructor(private clientsService: ClientsService) {
+    try {
+
+      this.clientsService.getClientes()
+        .subscribe((data: any) => {
+          this.clients = data.data;
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }
+
   ngOnInit(): void {
   }
 

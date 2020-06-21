@@ -7,12 +7,20 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
+
   products: any[] = [];
-  constructor(private productsService:ProductsService) { 
-    this.productsService.getProducts()
-    .subscribe((data:any) => {
-      this.products=data.data;
-    })
+
+  constructor(private productsService: ProductsService) {
+    try {
+      
+      this.productsService.getProducts()
+        .subscribe((data: any) => {
+          this.products = data.data;
+        })
+    } catch (error) {
+
+    }
+
   }
   ngOnInit(): void {
   }

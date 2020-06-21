@@ -9,6 +9,10 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getProducts() {
-    return this.http.get(`http://127.0.0.1:8000/api/producto`);
+    try {
+      return this.http.get(`http://127.0.0.1:8000/api/producto`);
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

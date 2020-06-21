@@ -24,17 +24,28 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    var email = $("#email").val();
-    var password = $("#password").val();
-    this.LoginService.login(email, password)
-      .subscribe((data: any) => {
-        alert(data.message)
-        if (!data.data[0].Estado) {
-          this.Router.navigate(['/login']);
-          return
-        }
-        this.Router.navigate(['/admin/home']);
-        this.AuthService.setCookie(data.data[0].Token)
-      })
+    try{
+
+      var email = $("#email").val();
+
+      var password = $("#password").val();
+
+      this.LoginService.login(email, password)
+        .subscribe((data: any) => {
+
+          alert(data.message)
+
+          if (!data.data[0].Estado) {
+            this.Router.navigate(['/login']);
+            return
+          }
+
+          this.Router.navigate(['/admin/home']);
+          
+          this.AuthService.setCookie(data.data[0].Token)
+        })
+    }catch(error){
+      console.log(error)
+    }
   }
 }
