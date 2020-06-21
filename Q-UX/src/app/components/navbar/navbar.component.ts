@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
 
       if (destroy) {
         alert("Ocurrio un error")
-        return
+        return 
       }
 
       this.Router.navigate(['/home']);

@@ -9,7 +9,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService implements CanActivate {
 
-  constructor(private CookieService: CookieService) { }
+  constructor(private CookieService: CookieService) {
+    this.CookieService.deleteAll()
+   }
 
   canActivate() {
     try {
@@ -37,7 +39,6 @@ export class AuthService implements CanActivate {
       if (token == null) {
         return
       }
-
       this.CookieService.set('Token-TKN', token)
     } catch (error) {
       console.log(error)
@@ -49,7 +50,6 @@ export class AuthService implements CanActivate {
     try {
 
       this.CookieService.delete('Token-TKN')
-
       return this.CookieService.check('Token-TKN')
     } catch (error) {
       console.log(error)
