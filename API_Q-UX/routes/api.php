@@ -24,6 +24,6 @@ Route::apiResource('delallesFactura','DetallesFacturaController');
 Route::apiResource('factura','FacturaController');
 Route::apiResource('producto','ProductoController');
 Route::apiResource('usuario','UsuarioController');
-Route::post('usuario/login','UsuarioController@login');
+Route::post('usuario/login','Login@login');
 
 
