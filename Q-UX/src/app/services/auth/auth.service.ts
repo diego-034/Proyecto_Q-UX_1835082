@@ -15,7 +15,7 @@ export class AuthService implements CanActivate {
 
   canActivate() {
     try {
-
+      
       return this.getCookie()
     } catch (error) {
       console.log(error)
