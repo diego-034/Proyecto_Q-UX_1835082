@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-sm-10"></div>
         <div class="col-sm-2">
-            <img src="../../../assets/img/add.png" (click)="validateLogin(true)" *ngIf="!validateLogin()">
-            <img src="../../../assets/img/delete.png" (click)="validateLogin(false)" *ngIf="validateLogin()">
+            <img src="../../../assets/img/add.png" (click)="validateActivate(true)" *ngIf="!validateActivate()">
+            <img src="../../../assets/img/close.png" (click)="validateActivate(false)" *ngIf="validateActivate()">
         </div>
     </div>
-    <app-form-products *ngIf="validateLogin()"></app-form-products>
-    <app-table-products *ngIf="!validateLogin()"></app-table-products>
+    <app-form-products *ngIf="validateActivate()"></app-form-products>
+    <app-table-products *ngIf="!validateActivate()" (emitEvent)="mostrar()"></app-table-products>
 </div>

@@ -1,68 +1,63 @@
 <!-- Default form register -->
-<form class="text-center border border-light p-5" action="#!">
+<form class="text-center border border-light p-5" [formGroup]="formProducts">
 
     <p class="h4 mb-4">Productos</p>
 
     <div class="form-row mb-4">
         <div class="col">
             <!-- First name -->
-            <input type="text" id="" class="form-control" placeholder="First name">
+            <input type="text" id="Name" formControlName="Nombre" class="form-control" placeholder="Nombre del Producto">
         </div>
         <div class="col">
             <!-- Last name -->
-            <input type="text" id="" class="form-control" placeholder="Imagen">
+            <label class="form-control btn-primary" style="cursor: pointer;">
+                <input style="display: none;" type="file" id="Imagen" formControlName="Imagen" class="" accept="image/png, image/jpeg,  image/jpg">
+                Subir Imagén
+            </label>
         </div>
     </div>
 
     <!--Description-->
     <div class="form-group">
-        <textarea class="form-control rounded-0" id="" rows="3" placeholder="Descripcion"></textarea>
+        <textarea class="form-control rounded-0" id="Description" formControlName="Descripcion" rows="3" placeholder="Descripcion"></textarea>
     </div>
 
     <!-- Color -->
     <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Options</label>
-        </div>
-        <select class="custom-select" id="inputGroupSelect01">
-          <option selected>Color</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <input type="text" id="Color" class="form-control" formControlName="Color" placeholder="Color">
     </div>
 
     <div class="form-row mb-4">
         <div class="col">
             <!-- Precio -->
-            <input type="text" id="" class="form-control" placeholder="Precio">
+            <input type="number" id="Price" class="form-control" formControlName="Precio" placeholder="Precio">
         </div>
         <div class="col">
             <!-- Descuento -->
-            <input type="text" id="" class="form-control" placeholder="Descuento">
+            <input type="number" id="Discount" class="form-control" formControlName="Descuento" placeholder="Descuento">
         </div>
         <div class="col">
             <!-- Iva -->
-            <input type="text" id="" class="form-control" placeholder="Iva" value="IVA 19%" disabled>
+            <input type="text" id="Iva" class="form-control" formControlName="IVA" placeholder="IVA 19%" disabled>
         </div>
     </div>
 
     <div class="form-row mb-4">
         <div class="col">
             <span>Talla S</span>
-            <input type="text" id="" class="form-control" value="0">
+            <input type="number" min="0" pattern="^[0-100]+" id="SizeS" placeholder="0" formControlName="TallaS" class="form-control">
         </div>
         <div class="col">
             <span>Talla M</span>
-            <input type="text" id="" class="form-control" value="0">
+            <input type="number" min="0" pattern="^[0-100]+" id="SizeM" placeholder="0" formControlName="TallaM" class="form-control">
         </div>
         <div class="col">
             <span>Talla L</span>
-            <input type="text" id="" class="form-control" value="0">
+            <input type="number" min="0" pattern="^[0-100]+" id="SizeL" placeholder="0" formControlName="TallaL" class="form-control">
         </div>
     </div>
 
 
-    <button type="button">Agregar</button>
+    <button type="button" class="btn btn-success" (click)="addProduct()">Agregar</button>
 </form>
 <!-- Default form register -->

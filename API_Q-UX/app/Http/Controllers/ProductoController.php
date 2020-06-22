@@ -42,24 +42,28 @@ class ProductoController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'Nombre' => 'required|string',
-                'Imagen' => 'string',
+                //'Imagen' => 'string',
                 'Descripcion' => 'required|string',
                 'Color' => 'required|string',
                 'Precio' => 'required|numeric',
-                'IVA' => 'required|numeric',
-                'Descuento' => 'required|numeric',
-                'Estado' => 'required|boolean',
+                //'IVA' => 'required|numeric',
+                //'Descuento' => 'required|numeric',
+                //'Estado' => 'required|boolean',
                 'TallaS' => 'numeric',
                 'TallaM' => 'numeric',
                 'TallaL' => 'numeric'
             ]);
 
             if ($validator->fails()) {
-                return $this->SendError("error de validación", $validator->errors(), 422);
+                return $this->SendError("error de validación", $validator->errors(), 200);
             }
 
             $input = $request->all();
-            
+
+            $input['Imagen']="Ruta";
+            $input['IVA']=0;
+            $input['Estado']=1;
+
             $data = Producto::create($input);
 
             return $this->SendResponse($data, "ingreso exitoso de producto");
@@ -76,7 +80,15 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        //
+        try {
+            $product = Producto::find($producto['IdProducto']);
+            if ($product == null) {
+                return $this->SendError("error en los datos", ["el producto no existe"], 200);
+            }
+            return $this->SendResponse($product, "producto encontrado exitosamente");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 
     /**
@@ -99,6 +111,15 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        //
+        try {
+            $product = Producto::find($producto['IdProducto']);
+            if ($product == null) {
+                return $this->SendError("error en los datos", ["el producto no existe"], 422);
+            }
+            Producto::destroy($product['IdProducto']);
+            return $this->SendResponse($product, "producto eliminado exitosamente");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 }

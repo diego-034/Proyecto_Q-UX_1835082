@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { FormProductsComponent } from '../../../components/form-products/form-products.component';
+import { TableProductsComponent } from '../../../components/table-products/table-products.component';
 
 @Component({
   selector: 'app-my-products',
@@ -6,13 +9,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-products.component.css']
 })
 export class MyProductsComponent implements OnInit {
+
+  @ViewChild('child1') childOne: TableProductsComponent;
+  @ViewChild('child2') childTwo: FormProductsComponent;
+
   value = false
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
   }
 
-  validateLogin(value = null) {
+  mostrar() {
+    this.childOne.emitEvent.subscribe(
+      res => {
+        console.log("Atributo:" + res);
+
+      }
+    );
+  }
+
+  validateActivate(value = null) {
     try {
 
       if (value != null) {

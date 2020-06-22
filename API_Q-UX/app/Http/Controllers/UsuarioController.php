@@ -56,7 +56,7 @@ class UsuarioController extends Controller
                 'Celular' => 'required|numeric',
                 'NIT' => 'required|integer',
                 'Contrasena' => 'required|string',
-                'Estado' => 'required|boolean'
+                //'Estado' => 'required|boolean'
             ]);
 
             if ($validator->fails()) {
@@ -64,6 +64,8 @@ class UsuarioController extends Controller
             }
 
             $input = $request->all();
+
+            $input['Estado']=1;
 
             $flag = false;
 
@@ -95,7 +97,15 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        //
+        try {
+            $usuario = Usuario::find($usuario['IdUsuario']);
+            if ($usuario == null) {
+                return $this->SendError("error en los datos", ["el usuario no existe"], 200);
+            }
+            return $this->SendResponse($usuario, "usuario encontrado exitosamente");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 
     /**
@@ -118,6 +128,15 @@ class UsuarioController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        //
+        try {
+            $usuario = Usuario::find($usuario['IdUsuario']);
+            if ($usuario == null) {
+                return $this->SendError("error en los datos", ["el usuario no existe"], 422);
+            }
+            Usuario::destroy($usuario['IdUsuario']);
+            return $this->SendResponse($usuario, "Usuario eliminado exitosamente");
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 }
