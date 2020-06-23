@@ -32,57 +32,48 @@
         <div class="col-12 user-img text-center">
             <img class="rounded" src="../../../assets/img/qux.jpg" alt="Logo de Q-UX">
         </div>
-        <form class="col-sm-12 bg-white rounded p-3 registry">
+        <form class="col-sm-12 bg-white rounded p-3 registry" [formGroup]="formUsers" (ngSubmit)="addUser()">
             <legend class="d-flex justify-content-between align-items-center">
-                <p>Campos Obligatorios*</p>
+                <p>Registrarse</p>
                 <i (click)=" vista = !vista; boton = !boton" class="fas fa-times-circle"></i>
             </legend>
-            <div class="form-row">
-                <div class="form-group col-md-4 inputs">
+            <div class="form-row mt-5">
+                <div class="form-group col-md-6 inputs">
                     <label for="nombres">Nombres</label>
-                    <input type="text" class="form-control" id="nombres" placeholder="Nombre">
+                    <input type="text" class="form-control" formControlName="Nombres" id="nombres" placeholder="Nombre">
                 </div>
-                <div class="form-group col-md-4 inputs">
+                <div class="form-group col-md-6 inputs">
                     <label for="apellidos">Apellidos</label>
-                    <input type="text" class="form-control" id="apellidos" placeholder="Apellido">
+                    <input type="text" class="form-control" formControlName="Apellidos" id="apellidos" placeholder="Apellido">
                 </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-4 inputs">
                     <label for="telefono">Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono" placeholder=" Teléfono: 000 12 34">
+                    <input type="text" class="form-control" formControlName="Telefono" id="telefono" placeholder="Teléfono: 000 12 34">
                 </div>
-            </div>
-
-            <div class="form-row">
                 <div class="form-group col-md-4 inputs">
                     <label for="celular">Celular</label>
-                    <input type="tel" class="form-control" id="celular" placeholder="Celular: 000 123 5678">
+                    <input type="text" class="form-control" formControlName="Celular" id="celular" placeholder="Celular: 000 123 5678">
                 </div>
                 <div class="form-group col-md-4 inputs">
-                    <label for="direccion">Direccion</label>
-                    <input type="text" class="form-control" id="direccion" placeholder="Apartment, studio, or floor">
-                </div>
-                <div class="form-group col-md-4 inputs">
-                    <label for="tipoDoc">Tipo de Documento</label>
-                    <select id="tipoDoc" class="form-control">
-                        <option selected disabled selected>Tipo de documento *</option>
-                        <option value="Cedula de Ciudadania">Cédula de Ciudadania</option>
-                        <option value="Cédula de Extranjería">Cédula de Extranjería</option>
-                    </select>
+                    <label for="nit">NIT</label>
+                    <input type="text" class="form-control" formControlName="NIT" id="nit" placeholder="NIT">
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-3 inputs">
-                    <label for="numeroDoc">N° de Documento</label>
-                    <input type="number" class="form-control" id="numeroDoc" placeholder="Número de Documento">
-                </div>
-                <div class="form-group col-md-5 inputs">
+                <div class="form-group col-md-6 inputs">
                     <label for="e-mail">Correo</label>
-                    <input type="text" class="form-control" id="e-mail" placeholder="E-mail">
+                    <input type="text" class="form-control" formControlName="Correo" id="e-mail" placeholder="E-mail">
                 </div>
-                <div class="form-group col-md-4 inputs">
+                <div class="form-group col-md-3 inputs">
                     <label for="inputPassword">Contraseña</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                    <input type="password" class="form-control" formControlName="Contrasena" id="inputPassword" placeholder="Contraseña">
+                </div>
+                <div class="form-group col-md-3 inputs">
+                    <label for="inputPassword"> Repetir Contraseña</label>
+                    <input type="password" class="form-control" id="inputPassword2" placeholder="Repita la contraseña">
                 </div>
             </div>
             <div class="col-12 d-flex  justify-content-end">
