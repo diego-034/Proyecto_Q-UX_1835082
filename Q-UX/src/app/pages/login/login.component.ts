@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup  } from '@angular/forms';
+
 import { LoginService } from 'src/app/services/login/login.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router';  
 
 declare var $: any;
 
@@ -45,6 +47,36 @@ export class LoginComponent implements OnInit {
           this.AuthService.setCookie(data.data[0].Token)
         })
     }catch(error){
+      console.log(error)
+    }
+  }
+
+  /* Añadir Usuarios */
+  
+  formUsers = new FormGroup({
+    Nombres: new FormControl(),
+    Apellidos: new FormControl(),
+    Telefono: new FormControl(),
+    Celular: new FormControl(),
+    NIT: new FormControl(),
+    Correo: new FormControl(),
+    Contrasena: new FormControl()
+  })
+
+  addUser() {
+    try {
+      // console.log("desde el Login Compoenent")
+      var response = this.LoginService.addUsers(this.formUsers.value)
+      response.subscribe((data: any) => {
+        console.log(data)
+        if (!data.success) {
+          alert("Error al añadir al Usuario")
+          return
+        } else {
+          alert("Usuario Añadido Correctamente")
+        }
+      })
+    } catch (error) {
       console.log(error)
     }
   }
