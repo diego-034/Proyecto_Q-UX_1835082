@@ -6,6 +6,6 @@
             <img src="../../../assets/img/close.png" (click)="validateActivate(false)" *ngIf="validateActivate()">
         </div>
     </div>
-    <app-form-products *ngIf="validateActivate()"></app-form-products>
-    <app-table-products *ngIf="!validateActivate()" (emitEvent)="mostrar()"></app-table-products>
+    <app-form-products *ngIf="validateActivate()" [response]="productChild"></app-form-products>
+    <app-table-products *ngIf="!validateActivate()" (product)="mostrar($event)"></app-table-products>
 </div>

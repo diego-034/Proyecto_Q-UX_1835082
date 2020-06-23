@@ -13,7 +13,10 @@
             <td>{{product.Color}}</td>
             <td *ngIf="product.Estado">Disponible</td>
             <td *ngIf="!product.Estado">Agotado</td>
-            <td><img src="../../../assets/img/see.png" alt="" class="mr-3" (click)="updateProduct(product.IdProducto,count+1)"><img src="../../../assets/img/delete.png" alt="" (click)="deleteProduct(product.IdProducto,count)"></td>
+            <td>
+                <img src="../../../assets/img/see.png" alt="" class="mr-3" (click)="updateProduct(product.IdProducto,count+1)">
+                <img src="../../../assets/img/delete.png" alt="" (click)="deleteProduct(product.IdProducto,count)">
+            </td>
         </tr>
     </tbody>
 </table>

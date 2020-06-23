@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
 import { FormProductsComponent } from '../../../components/form-products/form-products.component';
 import { TableProductsComponent } from '../../../components/table-products/table-products.component';
@@ -10,23 +10,26 @@ import { TableProductsComponent } from '../../../components/table-products/table
 })
 export class MyProductsComponent implements OnInit {
 
-  @ViewChild('child1') childOne: TableProductsComponent;
-  @ViewChild('child2') childTwo: FormProductsComponent;
+  productChild
 
   value = false
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
 
   }
 
-  mostrar() {
-    this.childOne.emitEvent.subscribe(
-      res => {
-        console.log("Atributo:" + res);
+  mostrar(event) {
+    try {
 
-      }
-    );
+      this.productChild = event
+
+      this.validateActivate(true)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   validateActivate(value = null) {

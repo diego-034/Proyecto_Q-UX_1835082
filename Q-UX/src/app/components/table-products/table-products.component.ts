@@ -8,7 +8,7 @@ import { ProductsService } from 'src/app/services/products/products.service';
 })
 export class TableProductsComponent implements OnInit {
 
-  @Output() emitEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() product: EventEmitter<any>;
 
   index = -1
   products: any[] = [];
@@ -20,6 +20,7 @@ export class TableProductsComponent implements OnInit {
         .subscribe((data: any) => {
           this.products = data.data;
         })
+        this.product = new EventEmitter<any>()
     } catch (error) {
       console.log(error)
     }
@@ -50,14 +51,14 @@ export class TableProductsComponent implements OnInit {
           //   alert("Ocurrio un error")
           //   return
           // }
-          this.emitEvent.emit(data.data)
+          this.product.emit(data.data)
         })
-        this.emitEvent.subscribe(
-          res => {
-            console.log(res);
-    
-          }
-        );
+        // this.product.subscribe(
+        //   res => {
+        //     console.log(res);
+  
+        //   }
+        // );
     } catch (error) {
       console.log(error)
     }

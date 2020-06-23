@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -10,9 +10,14 @@ import { ProductsService } from 'src/app/services/products/products.service';
   templateUrl: './form-products.component.html',
   styleUrls: ['./form-products.component.css']
 })
-export class FormProductsComponent implements OnInit {
+export class FormProductsComponent implements OnInit {  
+  
+  @Input() response  = null
 
-  constructor(private ProductsService: ProductsService, private Router: Router) { }
+  constructor(private ProductsService: ProductsService, private Router: Router) {
+   
+   }
+
   formProducts = new FormGroup({
     Nombre: new FormControl(),
     Imagen: new FormControl(),
@@ -27,6 +32,9 @@ export class FormProductsComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    if(this.response != null){
+      console.log(this.response)
+    }
   }
 
   //Metodo que llama al addProduct del Servicio Products
