@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, CanActivate } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
@@ -9,8 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService implements CanActivate {
 
-  constructor(private CookieService: CookieService) {
-    this.CookieService.deleteAll()
+  constructor() {
+    sessionStorage.clear()
    }
 
   canActivate() {
@@ -25,8 +24,9 @@ export class AuthService implements CanActivate {
 
   getCookie() {
     try {
-
-      return this.CookieService.check('Token-TKN')
+     if(sessionStorage.getItem('Token-TKN') == null)
+        return false
+      return true
     } catch (error) {
       console.log(error)
       return null
@@ -39,7 +39,7 @@ export class AuthService implements CanActivate {
       if (token == null) {
         return
       }
-      this.CookieService.set('Token-TKN', token)
+      sessionStorage.setItem('Token-TKN', token)
     } catch (error) {
       console.log(error)
       return
@@ -49,8 +49,8 @@ export class AuthService implements CanActivate {
   destroySesion() {
     try {
 
-      this.CookieService.delete('Token-TKN')
-      return this.CookieService.check('Token-TKN')
+      sessionStorage.removeItem('Token-TKN');
+      return sessionStorage.getItem('Token-TKN')
     } catch (error) {
       console.log(error)
       return false

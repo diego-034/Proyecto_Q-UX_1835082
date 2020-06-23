@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
       // console.log("desde el Login Compoenent")
       var response = this.LoginService.addUsers(this.formUsers.value)
       response.subscribe((data: any) => {
-        console.log(data)
         if (!data.success) {
           alert("Error al añadir al Usuario")
           return
