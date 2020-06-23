@@ -34,10 +34,13 @@ export class FormProductsComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.validacion()
+  }
+
+  validacion(){
     if(this.response != null){
-      console.log(this.response)
-     this.formProducts.setValue(this.response[0])
-    }
+      this.formProducts.setValue(this.response[0])
+     }
   }
 
   //Metodo que llama al addProduct del Servicio Products

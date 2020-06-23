@@ -32,11 +32,15 @@ export class MyProductsComponent implements OnInit {
     }
   }
 
-  validateActivate(value = null) {
+  validateActivate(value = null, close = null) {
     try {
 
       if (value != null) {
         this.value = value
+      }
+
+      if (close != null) {
+        this.productChild = null
       }
 
       return this.value

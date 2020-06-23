@@ -3,7 +3,7 @@
         <div class="col-sm-10"></div>
         <div class="col-sm-2">
             <img src="../../../assets/img/add.png" (click)="validateActivate(true)" *ngIf="!validateActivate()">
-            <img src="../../../assets/img/close.png" (click)="validateActivate(false)" *ngIf="validateActivate()">
+            <img src="../../../assets/img/close.png" (click)="validateActivate(false,true)" *ngIf="validateActivate()">
         </div>
     </div>
     <app-form-products *ngIf="validateActivate()" [response]="productChild"></app-form-products>
