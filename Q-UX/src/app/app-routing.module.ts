@@ -7,6 +7,8 @@ import { ProductsComponent } from './pages/products/products.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
 import { MyProductsComponent } from './pages/admin/my-products/my-products.component';
+import { VerProductoComponent } from './components/ver-producto/ver-producto.component';
+
 
 //Servicios
 import {AuthService} from '../app/services/auth/auth.service';
@@ -18,6 +20,7 @@ import {AuthService} from '../app/services/auth/auth.service';
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'products', component: ProductsComponent},
+  { path: 'seeProduct/:id', component: VerProductoComponent},
   { path: 'admin',
      children: [
        {

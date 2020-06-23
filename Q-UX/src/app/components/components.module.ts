@@ -10,6 +10,7 @@ import { ProductComponent } from './product/product.component';
 import { ClientComponent } from './client/client.component';
 import { FormProductsComponent } from './form-products/form-products.component';
 import { TableProductsComponent } from './table-products/table-products.component';
+import { VerProductoComponent } from './ver-producto/ver-producto.component';
 
 
 
@@ -20,7 +21,8 @@ import { TableProductsComponent } from './table-products/table-products.componen
     ProductComponent,
     ClientComponent,
     FormProductsComponent,
-    TableProductsComponent
+    TableProductsComponent,
+    VerProductoComponent
   ],
   exports: [ // esto es para exportar los componentes que aquí tenemos
     NavbarComponent,

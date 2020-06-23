@@ -1,0 +1,30 @@
+<div class="container mt-3 ">
+    <div class="d-flex justify-content-between" style="">
+        <h1 class=""> {{ product.Nombre | uppercase }} </h1>
+        <a [routerLink]="['/products']" class="btn btn-outline-danger" style="height: 40px;">Regresar</a>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <img src="https://dafitistaticco-a.akamaihd.net/p/color-siete-1662-32463-1-product.jpg" alt="Imagen del producto" class="img-fluid" style="width: 100%; height: 60%;">
+            <br><br>
+            <a [routerLink]="['/']" class="btn btn-outline-primary btn-block">Añadir al Carrito</a>
+        </div>
+
+        <div class="col-md-8">
+            <h3 class="">Descripción: <small>{{product.Descripcion}}</small></h3>
+            <hr>
+            <h3 class="">Color: <small>{{product.Color}}</small></h3>
+            <h3 class="">Precio: <small>{{product.Precio}}</small></h3>
+            <select class="form-control col-md-3 text-center" style="font-size: 17px;">
+                <option selected disabled>Talla</option>
+                <option [ngValue]="product.TallaS">{{ product.TallaS }}  <!--{{product.TallaS}}--></option>
+                <option [ngValue]="product.TallaM">{{ product.TallaM }}  <!--{{product.TallaM}}--></option>
+                <option [ngValue]="product.TallaL">{{ product.TallaL }}  <!--{{product.TallaL}}--></option>
+            </select>
+            <input class="mt-4 p-2 form-control col-md-3" type="number" placeholder="Cantidad">
+            <!-- <p class=""> {{product.color}}</p> -->
+        </div>
+    </div>
+</div>

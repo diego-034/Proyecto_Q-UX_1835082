@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -9,13 +10,15 @@ import { ProductsService } from 'src/app/services/products/products.service';
 export class ProductComponent {
 
   products: any[] = [];
+  id:number;
 
-  constructor(private ProductsService: ProductsService) {
+  constructor(private ProductsService: ProductsService,
+              private router:Router ) {
     try {
-      
       this.ProductsService.getProducts()
         .subscribe((data: any) => {
           this.products = data.data;
+          console.log( this.products);
         })
     } catch (error) {
       console.log(error)
@@ -25,7 +28,8 @@ export class ProductComponent {
   ngOnInit(): void {
   }
 
-  addCart(idx:number) {
-    alert("Añadido Correctamente");
+  verProducto() {
+    this.router.navigate( ['/seeProduct', this.id] )
   }
+
 }
