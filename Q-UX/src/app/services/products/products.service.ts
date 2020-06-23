@@ -58,11 +58,19 @@ export class ProductsService {
   }
 
   //Peticion de datos por id a la API
-  updateProducts(value){
+  selectProduct(value){
     try{
       return this.http.get(this.url+"/"+value)
     }catch(error){
 
+    }
+  }
+
+  updateProducts(value, FormData) {
+    try {
+       return this.http.put(this.url+"/"+value, FormData)
+    }catch(error) {
+      console.log(error)
     }
   }
 }

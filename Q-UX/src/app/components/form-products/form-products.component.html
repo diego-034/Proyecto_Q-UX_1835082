@@ -6,12 +6,14 @@
     <div class="form-row mb-4">
         <div class="col">
             <!-- First name -->
+            <input type="number" id="Name" formControlName="IdProducto" class="form-control" style="display: none;">
+
             <input type="text" id="Name" formControlName="Nombre" class="form-control" placeholder="Nombre del Producto">
         </div>
         <div class="col">
             <!-- Last name -->
             <label class="form-control btn-primary" style="cursor: pointer;">
-                <input style="display: none;" type="file" id="Imagen" formControlName="Imagen" class="" accept="image/png, image/jpeg,  image/jpg">
+                <input style="display: none;" type="file" id="Imagen"  class="" accept="image/png, image/jpeg,  image/jpg">
                 Subir Imagén
             </label>
         </div>
@@ -57,7 +59,7 @@
         </div>
     </div>
 
-
-    <button type="button" class="btn btn-success" (click)="addProduct()">Agregar</button>
+    <button type="button" class="btn btn-outline-primary" (click)="updateProduct()" *ngIf="response != null">Actualizar</button>
+    <button type="button" class="btn btn-success" (click)="addProduct()" *ngIf="response == null">Agregar</button>
 </form>
 <!-- Default form register -->

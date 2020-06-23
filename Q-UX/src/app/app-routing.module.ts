@@ -28,7 +28,7 @@ const routes: Routes = [
         path: 'products', // child route path
         component: MyProductsComponent, // child route component that the router renders
       }
-     ], canActivate:[AuthService] },
+     ] }, //, canActivate:[AuthService]
   { path: 'login', component: LoginComponent},
   { path: '**',   redirectTo: 'home', pathMatch: 'full' }
 ];

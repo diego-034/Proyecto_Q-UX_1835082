@@ -43,9 +43,9 @@ export class TableProductsComponent implements OnInit {
     }
   }
 
-  updateProduct(value, count) {
+  selectProduct(value, count) {
     try {
-      this.ProductsService.updateProducts(value)
+      this.ProductsService.selectProduct(value)
         .subscribe((data: any) => {
           // if (!data.data) {
           //   alert("Ocurrio un error")

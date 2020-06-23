@@ -6,6 +6,7 @@ use Exception;
 use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -47,7 +48,7 @@ class ProductoController extends Controller
                 'Color' => 'required|string',
                 'Precio' => 'required|numeric',
                 //'IVA' => 'required|numeric',
-                //'Descuento' => 'required|numeric',
+                'Descuento' => 'required|numeric',
                 //'Estado' => 'required|boolean',
                 'TallaS' => 'numeric',
                 'TallaM' => 'numeric',
@@ -81,7 +82,11 @@ class ProductoController extends Controller
     public function show(Producto $producto)
     {
         try {
-            $product = Producto::find($producto['IdProducto']);
+            $product = DB::table('productos')
+            ->select('IdProducto', 'Nombre',
+            'Descripcion','Color','Precio','IVA',
+            'Descuento','TallaS','TallaM','TallaL','Estado')
+            ->where('IdProducto', '=', $producto['IdProducto'])->get();
             if ($product == null) {
                 return $this->SendError("error en los datos", ["el producto no existe"], 200);
             }
@@ -100,7 +105,40 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        try {
+            if ($producto == null) {
+                return $this->SendError("error en los datos", ["el producto no existe"], 422);
+            }
+            $validator = Validator::make($request->all(), [
+                'Nombre' => 'required|string',
+                //'Imagen' => 'string',
+                'Descripcion' => 'required|string',
+                'Color' => 'required|string',
+                'Precio' => 'required|numeric',
+                //'IVA' => 'required|numeric',
+                'Descuento' => 'required|numeric',
+                //'Estado' => 'required|boolean',
+                'TallaS' => 'numeric',
+                'TallaM' => 'numeric',
+                'TallaL' => 'numeric'
+            ]);
+            if ($validator->fails()) {
+                return $this->SendError("error de validación", $validator->errors(), 422);
+            }  
+            
+            $producto->Nombre = $request->get("Nombre");
+            $producto->Descripcion = $request->get("Descripcion");
+            $producto->Color = $request->get("Color");
+            $producto->Precio = $request->get("Precio");
+            $producto->Descuento = $request->get("Descuento");
+            $producto->TallaS = $request->get("TallaS");
+            $producto->TallaM = $request->get("TallaM");
+            $producto->TallaL = $request->get("TallaL");        
+            $producto->save();
+            return $this->SendResponse($producto, "actualización exitosa");
+        }catch(Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
     }
 
     /**

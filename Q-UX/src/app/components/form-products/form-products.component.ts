@@ -19,21 +19,24 @@ export class FormProductsComponent implements OnInit {
    }
 
   formProducts = new FormGroup({
+    IdProducto: new FormControl(),
     Nombre: new FormControl(),
-    Imagen: new FormControl(),
+    //Imagen: new FormControl(),
     Descripcion: new FormControl(),
     Color: new FormControl(),
     Precio: new FormControl(),
     IVA: new FormControl(),
-    Descuento: new FormControl(),
-    TallaS: new FormControl(),
-    TallaM: new FormControl(),
-    TallaL: new FormControl()
+    Descuento: new FormControl(0),
+    TallaS: new FormControl(0),
+    TallaM: new FormControl(0),
+    TallaL: new FormControl(0),
+    Estado: new FormControl()
   })
 
   ngOnInit(): void {
     if(this.response != null){
       console.log(this.response)
+     this.formProducts.setValue(this.response[0])
     }
   }
 
@@ -49,6 +52,24 @@ export class FormProductsComponent implements OnInit {
           return
         } else {
           alert("Producto agregado exitosamente")
+          this.Router.navigate(['/admin/home']);
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  updateProduct() {
+    try {
+      var response = this.ProductsService.updateProducts(this.formProducts.get('IdProducto').value,this.formProducts.value)
+      response.subscribe((data: any) => {
+        console.log(data)
+        if (!data.success) {
+          alert("No se pudo actualizar")
+          return
+        } else {
+          alert("Producto actualizado exitosamente")
           this.Router.navigate(['/admin/home']);
         }
       })
