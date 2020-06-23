@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginService {
 
+  /* Ruta para añadir a un usuario */
+  url = `http://127.0.0.1:8000/api/usuario`;
+
   constructor(private http: HttpClient) { }
 
   login(email, password) {
@@ -20,6 +23,18 @@ export class LoginService {
       return this.http.post(`http://127.0.0.1:8000/api/login`, form);
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  //Peticion POST a la API para añadir Usuario
+  addUsers(FormData) {
+    try {
+      console.log("desde el Servicio de Login")
+      return this.http.post(this.url, FormData)
+        
+    } catch (error) {
+      console.log(error)
+      return null
     }
   }
 }
