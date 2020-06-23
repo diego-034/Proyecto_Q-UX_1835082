@@ -24,4 +24,8 @@ export class ProductComponent {
   
   ngOnInit(): void {
   }
+
+  addCart(idx:number) {
+    alert("Añadido Correctamente");
+  }
 }
