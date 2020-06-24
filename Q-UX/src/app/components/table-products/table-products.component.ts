@@ -47,18 +47,9 @@ export class TableProductsComponent implements OnInit {
     try {
       this.ProductsService.selectProduct(value)
         .subscribe((data: any) => {
-          // if (!data.data) {
-          //   alert("Ocurrio un error")
-          //   return
-          // }
+
           this.product.emit(data.data)
         })
-        // this.product.subscribe(
-        //   res => {
-        //     console.log(res);
-  
-        //   }
-        // );
     } catch (error) {
       console.log(error)
     }

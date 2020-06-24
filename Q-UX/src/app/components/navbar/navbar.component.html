@@ -21,7 +21,7 @@
             </li>
             <li class="nav-item" routerLinkActive="activate" *ngIf='canActivate()'>
                 <a class="nav-link" routerLink="admin/products">Productos</a>
-            </li>           
+            </li>
             <!--<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -35,8 +35,9 @@
             </div>
             </li>-->
         </ul>
-        <form class="form-inline my-2 my-lg-0" *ngIf='canActivate()'>
-            <button (click)="destroySesion()" class="btn btn-outline-danger my-2 my-sm-0">Salir</button>
-        </form>
+        <div class="form-inline my-2 my-lg-0">
+            <a class="nav-link" routerLink="ecommerce"><img src="../../../assets/img/car.png" *ngIf='!canActivate()' /></a>
+            <button (click)="destroySesion()" *ngIf='canActivate()' class="btn btn-outline-danger my-2 my-sm-0">Salir</button>
+        </div>
     </div>
 </nav>

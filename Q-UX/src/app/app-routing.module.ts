@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 // Paginas a las que redirigimos
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { EcommerceComponent } from './pages/ecommerce/ecommerce.component';
+
 
 import { LoginComponent } from './pages/login/login.component';
 import { MyHomeComponent } from './pages/admin/my-home/my-home.component';
@@ -20,6 +22,7 @@ import {AuthService} from '../app/services/auth/auth.service';
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'products', component: ProductsComponent},
+  { path: 'ecommerce', component: EcommerceComponent},
   { path: 'seeProduct/:id', component: VerProductoComponent},
   { path: 'admin',
      children: [
@@ -31,7 +34,7 @@ const routes: Routes = [
         path: 'products', // child route path
         component: MyProductsComponent, // child route component that the router renders
       }
-     ] }, //, canActivate:[AuthService]
+     ], canActivate:[AuthService] }, 
   { path: 'login', component: LoginComponent},
   { path: '**',   redirectTo: 'home', pathMatch: 'full' }
 ];
