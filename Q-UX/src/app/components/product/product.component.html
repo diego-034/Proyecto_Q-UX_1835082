@@ -6,15 +6,7 @@
             <h5 class="card-title">Color: {{ product.Color }}</h5>
             <h5 class="card-title">Precio : ${{ product.Precio }}</h5>
 
-            <!-- <p class=" card-text ">
-                Descripción : {{product.Descripcion}}
-            </p> -->
-            <!-- <button (click)="verProducto()" class="btn btn-outline-success btn-block">
-                Ver mas...
-            </button> -->
             <a [routerLink]="['/seeProduct', i]" class="btn btn-outline-success btn-block">Ver más....</a>
         </div>
     </div>
 </div>
-
-<!-- <app-car [producto]="producto" *ngFor="let producto of product"></app-car> -->

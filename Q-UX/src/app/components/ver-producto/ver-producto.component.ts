@@ -17,14 +17,6 @@ export class VerProductoComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private productsService: ProductsService) {
-
-    this.activatedRoute.params.subscribe( data => { // Para escuchar los cambios o lo que vine en  los parametros usamos el .subscribe
-      // console.log(data["i"]); // el id es que nos trae el data de lo que escucho el subscribe
-      // this.heroe = this._heroesService.getHeroe(data['id'])
-      // console.log(this.heroe);
-      console.log("Desde el constructor")
-    } );
-
     
   }
 
@@ -38,13 +30,10 @@ export class VerProductoComponent implements OnInit {
           .subscribe((data: any) => {
             this.product = data.data[this.id];
             console.log( this.product );
-            // console.log( this.product.Descripcion ) 
           })
       } catch (error) {
         console.log(error)
       }
-      // console.log(this.product)
-      console.log("desde el ngOnInit ");
     })
 
   }
