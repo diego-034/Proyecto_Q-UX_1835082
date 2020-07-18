@@ -5,6 +5,9 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';  
 
+// SweetAlert
+import Swal from '../../../assets/js/sweetalert2.all.min.js';
+
 declare var $: any;
 
 @Component({
@@ -29,22 +32,32 @@ export class LoginComponent implements OnInit {
     try{
 
       var email = $("#email").val();
-
       var password = $("#password").val();
 
       this.LoginService.login(email, password)
         .subscribe((data: any) => {
-
-          alert(data.message)
 
           if (!data.data[0].Estado) {
             this.Router.navigate(['/login']);
             return
           }
 
-          this.Router.navigate(['/admin/home']);
-          
+          Swal.fire({
+            allowOutsideClick: false,
+            icon:'info',
+            text: data.message,
+            timer: 500
+          });
+          Swal.showLoading();
+
           this.AuthService.setCookie(data.data[0].Token)
+          this.Router.navigate(['/admin/home']);
+        }, (err) => {
+          Swal.fire({
+            icon:'error',
+            title: "Error!!!",
+            text: err.error.error
+          });
         })
     }catch(error){
       console.log(error)
@@ -65,15 +78,31 @@ export class LoginComponent implements OnInit {
 
   addUser() {
     try {
-      // console.log("desde el Login Compoenent")
       var response = this.LoginService.addUsers(this.formUsers.value)
       response.subscribe((data: any) => {
         if (!data.success) {
-          alert("Error al añadir al Usuario")
+          Swal.fire({
+            allowOutsideClick: false,
+            icon:'error',
+            title: 'Error!!!',
+            text: "No se pudo añadir",
+          });
           return
         } else {
-          alert("Usuario Añadido Correctamente")
+          Swal.fire({
+            icon:'success',
+            text: "Registrado Correctamente"
+          });
+          this.vista = false;
+          this.boton = true;
         }
+      }, err => {
+        Swal.fire({
+          allowOutsideClick: false,
+          icon:'error',
+          title: 'Error!!!',
+          text: err.error.error
+        });
       })
     } catch (error) {
       console.log(error)

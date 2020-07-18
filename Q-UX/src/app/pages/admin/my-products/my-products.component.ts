@@ -10,9 +10,9 @@ import { TableProductsComponent } from '../../../components/table-products/table
 })
 export class MyProductsComponent implements OnInit {
 
-  productChild
+  productChild: any;
 
-  value = false
+  value: boolean = false;
   constructor() {
 
   }

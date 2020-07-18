@@ -29,7 +29,6 @@ export class LoginService {
   //Peticion POST a la API para añadir Usuario
   addUsers(FormData) {
     try {
-      console.log("desde el Servicio de Login")
       return this.http.post(this.url, FormData)
         
     } catch (error) {

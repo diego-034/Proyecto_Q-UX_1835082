@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 //Importamos el servicio
 import { ProductsService } from 'src/app/services/products/products.service';
 
+// SweetAlert
+import Swal from '../../../assets/js/sweetalert2.all.min.js';
+
 @Component({
   selector: 'app-form-products',
   templateUrl: './form-products.component.html',
@@ -50,11 +53,19 @@ export class FormProductsComponent implements OnInit {
       var response = this.ProductsService.addProducts(this.formProducts.value)
       response.subscribe((data: any) => {
         console.log(data)
-        if (!data.success) {
-          alert("No se pudo agregar el producto")
+        if (!data.success) { // Hay que organizar
+          Swal.fire({
+            icon:'error',
+            title: "Error!!!",
+            text: data.message
+          });
           return
         } else {
-          alert("Producto agregado exitosamente")
+          Swal.fire({
+            icon: "success",
+            title: "Correcto",
+            text: data.message
+          })
           this.Router.navigate(['/admin/home']);
         }
       })
@@ -69,10 +80,14 @@ export class FormProductsComponent implements OnInit {
       response.subscribe((data: any) => {
         console.log(data)
         if (!data.success) {
-          alert("No se pudo actualizar")
+          alert("No se pudo actualizar") // Hay que organizar
           return
         } else {
-          alert("Producto actualizado exitosamente")
+          Swal.fire({
+            icon: "success",
+            title: "Correcto",
+            text: data.message
+          })
           this.Router.navigate(['/admin/home']);
         }
       })
