@@ -11,14 +11,28 @@ export class ProductComponent {
 
   products: any[] = [];
   id:number;
+  loading: boolean;
+  error: boolean;
+  noFound: boolean;
 
   constructor(private ProductsService: ProductsService,
               private router:Router ) {
+
+    this.loading = true;
+    this.error = false;
+    this.noFound = false;
+
     try {
       this.ProductsService.getProducts()
         .subscribe((data: any) => {
+          if(data.data.length === 0) {
+            this.noFound = true;
+          }
           this.products = data.data;
-          console.log( this.products);
+          this.loading = false;
+        }, () => {
+          this.error = true;
+          this.loading = false;
         })
     } catch (error) {
       console.log(error)

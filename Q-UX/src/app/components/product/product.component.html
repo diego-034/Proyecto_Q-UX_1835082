@@ -1,3 +1,12 @@
+<app-loading *ngIf="loading" class="m-5"></app-loading>
+<app-error *ngIf="error" class="m-5"></app-error>
+
+<div *ngIf="noFound" class="alert alert-info animated fadeIn">
+    <h3>ERROR</h3>
+    <p>No se ha encontrado contenido</p>
+</div>
+
+
 <div class="card-columns">
     <div *ngFor="let product of products; let i = index" class="card">
         <img src="https://dafitistaticco-a.akamaihd.net/p/color-siete-1662-32463-1-product.jpg" class="card-img-top" alt="...">

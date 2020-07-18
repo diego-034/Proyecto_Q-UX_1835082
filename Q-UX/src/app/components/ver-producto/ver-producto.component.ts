@@ -14,10 +14,13 @@ export class VerProductoComponent implements OnInit {
   product: any = {};
   nombre:string;
   id: any;
+  loading: boolean;
+  error: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private productsService: ProductsService) {
-    
+    this.loading = true;
+    this.error = false;
   }
 
   ngOnInit(): void {
@@ -29,12 +32,15 @@ export class VerProductoComponent implements OnInit {
         this.productsService.getProducts()
           .subscribe((data: any) => {
             this.product = data.data[this.id];
+            this.loading = false
             console.log( this.product );
+          }, () => { // Captura de algun error
+            this.error = true;
+            this.loading = false;
           })
       } catch (error) {
         console.log(error)
       }
     })
-
   }
 }
