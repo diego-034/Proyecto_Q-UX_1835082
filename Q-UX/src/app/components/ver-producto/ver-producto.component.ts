@@ -27,11 +27,10 @@ export class VerProductoComponent implements OnInit {
 
     this.activatedRoute.params.subscribe( params => {
       this.id = params.id
-      // console.log(this.id);
       try {
-        this.productsService.getProducts()
+        this.productsService.selectProduct(this.id)
           .subscribe((data: any) => {
-            this.product = data.data[this.id];
+            this.product = data.data[0];
             this.loading = false
             console.log( this.product );
           }, () => { // Captura de algun error

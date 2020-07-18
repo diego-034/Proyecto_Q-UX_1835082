@@ -1,6 +1,6 @@
 <app-loading *ngIf="loading" class="m-5"></app-loading>
 <app-error *ngIf="error" class="m-5"></app-error>
-<div class="container mt-3 ">
+<div *ngIf="!loading && !error" class="container mt-3 ">
     <div class="d-flex justify-content-between">
         <h1 class=""> {{ product.Nombre }} </h1>
         <a [routerLink]="['/products']" class="btn btn-outline-danger" style="height: 40px;">Regresar</a>
