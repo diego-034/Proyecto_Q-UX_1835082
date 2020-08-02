@@ -1,11 +1,13 @@
 /* Formulario de inicio de sesion */
+
 .r-main {
     width: 100%;
     background-image: url(../../../assets/img/camisasqux.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    margin: 0;position: absolute;
+    margin: 0;
+    position: absolute;
     z-index: 1000;
     height: 100vh;
 }
@@ -16,7 +18,7 @@
     padding: 0;
 }
 
-.modal-content {
+.modal-content.ingreso {
     background-color: #3B4652;
     opacity: .95;
     padding: 0 20px 15px 20px;
@@ -55,115 +57,65 @@ hr {
 .fgm-gr#user-group::before {
     content: "\f007";
 }
+
 .fgm-gr#pass-group::before {
     content: "\f502";
 }
 
-button {
+.col-12 button {
     width: 60%;
     margin: 5px 0 25px;
 }
 
-
 .forgot p,
-.forgot a{
+.forgot a {
     color: white;
     cursor: pointer;
 }
 
 .forgot p:hover,
-.forgot a:hover{
-    text-decoration: none; 
+.forgot a:hover {
+    text-decoration: none;
     color: #848484;
 }
 
 
 /* Formulario de registro */
 
-.minh-100 { 
-    width: 100%;
-    background-image: url(../../../assets/img/camisasqux.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    margin: 0;
-    position: absolute; 
-    z-index: 1000;
-} 
-
-form.registry {
-    border: 1px solid #e1e1e1;
-    max-width: 75%;
-    margin-top: -1rem;
-    z-index: -1;
-    opacity: .9;
+.user-img img {
+    width: 33%;
+    height: 9rem;
+    margin-top: 1rem;
 }
 
-legend {
-    padding-right: 2rem;
-}
-
-legend p {
-    font-size: 1rem;
-    color: #ff2e2e;
-}
-
-@media only screen and (min-width:860px) {
-    legend p {
-        font-size: 1.2rem;
-    }
-}
-
-legend i:hover {
-    cursor: pointer;
-    color: #848484;
-}
-
-
-
-.user-img  img {
-    width: 10rem;
-    height: 10rem;
-}
 @media only screen and (min-width:768px) {
     /* Imagen */
     .user-img img {
-        margin-top: -11rem;
+        width: 30%;
+        height: 8rem;
     }
     /*Principal*/
     .minh-100 {
         height: 100vh;
-        position: fixed;       
-    } 
+        position: fixed;
+    }
     /*Formulario*/
     form.registry {
+        max-width: 75%;
         margin-top: -25rem;
+    }
+}
 
-    }  
+@media only screen and (min-width:992px) {
+    .user-img img {
+        width: 20%;
+        height: 9rem;
+        margin-top: -8rem;
+    }
 }
 
 input[type=number] {
-    -webkit-appearance: none; 
-    margin: 0; 
-    -moz-appearance:textfield;
-}
-
-.inputs {
-    padding: 0 30px 0 30px;
-}
-@media only screen and (min-width:580px) {
-    .inputs {
-        padding: 5px;
-    }
-
-    .minh-100 { 
-        width: 100%;
-        background-image: url(../../../assets/img/camisasqux.jpeg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        margin: 0;
-        position: absolute; 
-        z-index: 1000;
-    } 
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield;
 }

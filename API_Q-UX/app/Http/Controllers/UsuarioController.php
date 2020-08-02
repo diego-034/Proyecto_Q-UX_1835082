@@ -55,12 +55,12 @@ class UsuarioController extends Controller
                 'Telefono' => 'required|numeric',
                 'Celular' => 'required|numeric',
                 'NIT' => 'required|integer',
-                'Contrasena' => 'required|string',
+                'Contrasena' => 'required|string',  
                 //'Estado' => 'required|boolean'
             ]);
 
             if ($validator->fails()) {
-                return $this->SendError("error de validación", $validator->errors(), 422);
+                return $this->SendError("Ha ocurrido un Error", $validator->errors(), 422);
             }
 
             $input = $request->all();
@@ -83,7 +83,7 @@ class UsuarioController extends Controller
 
             $data = Usuario::create($input);
 
-            return $this->SendResponse($data, "ingreso exitoso de usuario");
+            return $this->SendResponse($data, "Registrado Correctamente");
         } catch (Exception $ex) {
             return $this->SendError($ex->__toString());
         }

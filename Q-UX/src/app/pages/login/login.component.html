@@ -1,22 +1,29 @@
 <div class="r-main">
 
-    <div *ngIf="boton" class="modal-dialog text-center">
+    <div class="modal-dialog text-center">
         <div class="col-sm-8 main-section animated fadeIn fast">
-            <div class="modal-content">
+            <div class="modal-content ingreso">
+
                 <div class="col-12 img-user">
                     <img class="rounded-circle" src="../../../assets/img/qux.jpg" alt="">
                 </div>
-                <form class="col-12">
-                    <div class="form-group fgm-gr" id="user-group">
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Correo">
+
+                <form class="col-12" (ngSubmit)="login( forma )" #forma="ngForm" autocomplete="off">
+                    <div class="form-group fgm-gr text-left" id="user-group">
+                        <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Correo" required>
+                        <span *ngIf="email.invalid && email.touched" class="animated fadeIn fast text-light">Campo Obligatorio</span>
                     </div>
-                    <div class="form-group fgm-gr" id="pass-group">
-                        <input type="password" id="password" class="form-control" placeholder="Contraseña">
+
+                    <div class="form-group fgm-gr text-left" id="pass-group">
+                        <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel" placeholder="Contraseña" minlength="6" required>
+                        <span *ngIf="password.invalid && password.touched" class="animated fadeIn fast text-light">Campo Obligatorio</span>
                     </div>
-                    <button type="button" class="btn btn-primary" (click)="login()"><i class="fas fa-sign-in-alt"></i>   Ingresar</button>
+
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>   Ingresar</button>
                 </form>
+
                 <div class="col-12 forgot">
-                    <p (click)=" vista = !vista; boton = !boton ">Registrarse</p>
+                    <p data-toggle="modal" data-target="#staticBackdrop">Registrarse</p>
                     <hr>
                     <a href="#">Olvide la contraseña</a>
                 </div>
@@ -27,58 +34,81 @@
 
 <!--Registro-->
 
-<div *ngIf='vista' class="">
-    <div class="row justify-content-center align-items-center minh-100 animated fadeIn fast" id="div-form">
-        <div class="col-12 user-img text-center">
-            <img class="rounded" src="../../../assets/img/qux.jpg" alt="Logo de Q-UX">
-        </div>
-        <form class="col-sm-12 bg-white rounded p-3 registry" [formGroup]="formUsers" (ngSubmit)="addUser()">
-            <legend class="d-flex justify-content-between align-items-center">
-                <p>Registrarse</p>
-                <i (click)=" vista = !vista; boton = !boton" class="fas fa-times-circle"></i>
-            </legend>
-            <div class="form-row mt-5">
-                <div class="form-group col-md-6 inputs">
-                    <label for="nombres">Nombres</label>
-                    <input type="text" class="form-control" formControlName="Nombres" id="nombres" placeholder="Nombre">
-                </div>
-                <div class="form-group col-md-6 inputs">
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" class="form-control" formControlName="Apellidos" id="apellidos" placeholder="Apellido">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-4 inputs">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" class="form-control" formControlName="Telefono" id="telefono" placeholder="Teléfono: 000 12 34">
-                </div>
-                <div class="form-group col-md-4 inputs">
-                    <label for="celular">Celular</label>
-                    <input type="text" class="form-control" formControlName="Celular" id="celular" placeholder="Celular: 000 123 5678">
-                </div>
-                <div class="form-group col-md-4 inputs">
-                    <label for="nit">NIT</label>
-                    <input type="text" class="form-control" formControlName="NIT" id="nit" placeholder="NIT">
-                </div>
+<div class="modal fade " id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="opacity: .95;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 *ngIf="formInvalid && !formValid" class="text-danger">Campos Obligatorios</h5>
+                <h5 *ngIf="!formInvalid && formValid">Registro de Usuarios</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="reset()">
+                        <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-6 inputs">
-                    <label for="e-mail">Correo</label>
-                    <input type="text" class="form-control" formControlName="Correo" id="e-mail" placeholder="E-mail">
-                </div>
-                <div class="form-group col-md-3 inputs">
-                    <label for="inputPassword">Contraseña</label>
-                    <input type="password" class="form-control" formControlName="Contrasena" id="inputPassword" placeholder="Contraseña">
-                </div>
-                <div class="form-group col-md-3 inputs">
-                    <label for="inputPassword"> Repetir Contraseña</label>
-                    <input type="password" class="form-control" id="inputPassword2" placeholder="Repita la contraseña">
-                </div>
+            <div class="user-img text-center">
+                <img class="rounded" src="../../../assets/img/qux.jpg" alt="Logo de Q-UX">
             </div>
-            <div class="col-12 d-flex  justify-content-end">
-                <button type="submit" class="btn btn-primary col-md-2 d-block mx-auto">Registrarse</button>
+
+            <div class="modal-body">
+                <form [formGroup]="formUsers" (ngSubmit)="addUser()" autocomplete="off">
+                    <div class="form-row mt-3">
+                        <div class="form-group col-md-6 inputs">
+                            <label for="nombres">Nombres</label>
+                            <input type="text" class="form-control" [class.is-invalid]="nombreNoValido" formControlName="Nombres" id="nombres" placeholder="Nombre">
+                            <small *ngIf="nombreNoValido" class="text-danger">Ingrese 3 letras</small>
+                        </div>
+
+                        <div class="form-group col-md-6 inputs">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" class="form-control" [class.is-invalid]="apellidoNoValido" formControlName="Apellidos" id="apellidos" placeholder="Apellido">
+                            <small *ngIf="apellidoNoValido" class="text-danger">Ingrese 4 letras</small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4 inputs">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" class="form-control" [class.is-invalid]="telefonoNoValido" formControlName="Telefono" id="telefono" placeholder="Teléfono: 000 12 34">
+                            <small *ngIf="telefonoNoValido" class="text-danger">Ingrese solo números</small>
+                        </div>
+
+                        <div class="form-group col-md-4 inputs">
+                            <label for="celular">Celular</label>
+                            <input type="text" class="form-control" [class.is-invalid]="celularNoValido" formControlName="Celular" id="celular" placeholder="Celular: 000 123 5678">
+                            <small *ngIf="celularNoValido" class="text-danger">Ingrese solo números</small>
+                        </div>
+
+                        <div class="form-group col-md-4 inputs">
+                            <label for="nit">NIT</label>
+                            <input type="text" class="form-control" [class.is-invalid]="nitNoValido" formControlName="NIT" id="nit" placeholder="NIT">
+                            <small *ngIf="nitNoValido" class="text-danger">Ingrese solo números</small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6 inputs">
+                            <label for="e-mail">Correo</label>
+                            <input type="text" class="form-control" [class.is-invalid]="correoNoValido" formControlName="Correo" id="e-mail" placeholder="E-mail">
+                            <small *ngIf="correoNoValido" class="text-danger">Ingrese un correo valido</small>
+                        </div>
+
+                        <div class="form-group col-md-3 inputs">
+                            <label for="inputPassword">Contraseña</label>
+                            <input type="password" class="form-control" [class.is-invalid]="pass1NoValido" formControlName="pass1" id="inputPassword" placeholder="Contraseña">
+                            <small *ngIf="pass1NoValido" class="text-danger">Minimo 6 caracteres</small>
+                        </div>
+
+                        <div class="form-group col-md-3 inputs">
+                            <label for="inputPassword"> Repetir </label>
+                            <input type="password" class="form-control" [class.is-invalid]="pass2NoValido" formControlName="pass2" id="inputPassword2" placeholder="Repita la contraseña">
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex  justify-content-end">
+                        <button type="submit" class="btn btn-primary col-md-2 d-block mx-auto">Registrarse</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>

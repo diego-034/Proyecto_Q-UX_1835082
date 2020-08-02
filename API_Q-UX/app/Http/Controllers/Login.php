@@ -28,13 +28,13 @@ class Login extends Controller
                 ->where('Contrasena', '=',  $request->input('Contrasena'))->get();
 
             if ($user->isEmpty()) {
-                return $this->SendResponse(
+                return $this->SendError(
                     null,
                     "Revise el usuario y la contraseña e intente de nuevo"
                 );
             }
 
-            return $this->SendResponse($user, "Logeo exitoso de usuario");
+            return $this->SendResponse($user, "Espere por favor...");
         } catch (Exception $ex) {
             return $this->SendError($ex->__toString());
         }

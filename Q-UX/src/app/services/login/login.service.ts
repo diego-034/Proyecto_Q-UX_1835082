@@ -17,22 +17,30 @@ export class LoginService {
 
       var form = new FormData()
 
-      form.append("Correo", email)
-      form.append("Contrasena", password)
+      form.append("Correo", email);
+      form.append("Contrasena", password);
 
       return this.http.post(`http://127.0.0.1:8000/api/login`, form);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
   //Peticion POST a la API para añadir Usuario
   addUsers(FormData) {
+    const formulario = {
+      Apellidos: FormData.Apellidos,
+      Celular: FormData.Celular,
+      Correo: FormData.Correo,
+      NIT: FormData.NIT,
+      Nombres: FormData.Nombres,
+      Telefono: FormData.Telefono,
+      Contrasena: FormData.pass1
+    }
     try {
-      return this.http.post(this.url, FormData)
-        
+      return this.http.post(this.url, formulario);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return null
     }
   }
