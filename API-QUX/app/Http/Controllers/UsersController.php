@@ -41,7 +41,11 @@ class UsersController extends Controller
         try {
 
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string',
+                'Nombres'=> 'required|string',
+                'Apellidos' => 'required|string',
+                'Telefono' => 'required|string',
+                'Celular' => 'required|string',
+                'NIT' => 'required|string',
                 'email' => 'required|email',
                 'password' => 'required|string',  
                 'confirm_password' => 'required|same:password'
@@ -53,7 +57,7 @@ class UsersController extends Controller
 
             $input = $request->all();
             $input["password"] = bcrypt($request->get("password"));
-
+            $input["Estado"] = 1;
             $data = User::create($input);
 
             // $data['token'] = $data->createToken("MyApp")->accessToken;
