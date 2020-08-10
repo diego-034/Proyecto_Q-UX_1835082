@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::post('login','UsersController@store');
 
-Route::post('users','UsersController@store');
 
-Route::group([ 'middleware'=>['cors','auth:api'] ], function(){
+
+Route::group([ 'middleware'=>['auth:api','cors'] ], function(){
     Route::get('users','UsersController@index');
     Route::get('users/{id}','UsersController@show');
     Route::apiResource('clients','ClientController');

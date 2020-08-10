@@ -8,23 +8,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class LoginService {
 
   /* Ruta para añadir a un usuario */
-  url = `http://127.0.0.1:8000/api/users`;
+  url = `http://127.0.0.1:8000/api/login`;
 
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
     try {
       
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json',
-          'Accept': 'application/json',
-          'Access-Control-Allow-Origin' :'http://127.0.0.1:8000',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
-          // Authorization: 'my-auth-token'
-        })
-      };
+      
       
 
       var form = new FormData()
@@ -33,9 +24,9 @@ export class LoginService {
       form.append("password", password);
       form.append("grant_type", "password");
       form.append("client_id", "2");
-      form.append("client_secret", "GQMKLruQxwz6dGz50r7TVb7psnAN7qkvmLO584wz");
+      form.append("client_secret", "CfIWoZUk5iF2b63AZbwsRqFCjggeyIYuik7e3UsP");
       
-      return this.http.post(`http://127.0.0.1:8000/oauth/token`, form, httpOptions);
+      return this.http.post(`http://127.0.0.1:8000/oauth/token`, form);
     } catch (error) {
       console.log(error);
     }
@@ -43,6 +34,16 @@ export class LoginService {
 
   //Peticion POST a la API para añadir Usuario
   addUsers(FormData) {
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin' :'*',
+          'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding',
+          'Access-Control-Allow-Methods': 'PUT, POST, GET, OPTIONS, DELETE'
+          // Authorization: 'my-auth-token'
+        })
+      };
     const formulario = {
       Apellidos: FormData.Apellidos,
       Celular: FormData.Celular,
