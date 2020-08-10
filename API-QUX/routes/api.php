@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 Route::post('login','UsersController@store');
+Route::get('products','UsersController@index');
 
 
 

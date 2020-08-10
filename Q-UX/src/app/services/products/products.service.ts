@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProductsService {
   response = null
   //Url para las peticiones a la API de laravel
-  url = `http://127.0.0.1:8000/api/producto`
+  url = `http://127.0.0.1:8000/api/products`
 
   //Constructor par ainyectar las dependencias
   constructor(private http: HttpClient) { }
