@@ -18,8 +18,17 @@ export class FormProductsComponent implements OnInit {
   @Input() response  = null
 
   constructor(private ProductsService: ProductsService, private Router: Router) {
-   
-   }
+
+    if(!sessionStorage.getItem('Token-TKN')) {
+        this.Router.navigate(['/login']);
+        return;
+    }
+
+  }
+
+  ngOnInit(): void {
+    this.validacion()
+  }
 
   formProducts = new FormGroup({
     IdProducto: new FormControl(),
@@ -34,15 +43,11 @@ export class FormProductsComponent implements OnInit {
     TallaM: new FormControl(0),
     TallaL: new FormControl(0),
     Estado: new FormControl()
-  })
-
-  ngOnInit(): void {
-    this.validacion()
-  }
+  });
 
   validacion(){
     if(this.response != null){
-      this.formProducts.setValue(this.response[0])
+      this.formProducts.setValue(this.response[0]);
      }
   }
 

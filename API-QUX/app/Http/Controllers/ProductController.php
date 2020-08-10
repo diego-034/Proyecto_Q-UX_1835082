@@ -81,14 +81,14 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product, $id)
     {
         try {
             $product = DB::table('products')
             ->select('IdProducto', 'Nombre',
             'Descripcion','Color','Precio','IVA',
             'Descuento','TallaS','TallaM','TallaL','Estado')
-            ->where('IdProducto', '=', $product['IdProducto'])->get();
+            ->where('IdProducto', '=', $id)->get();
             if ($product == null) {
                 return $this->SendError("error en los datos", ["el producto no existe"], 200);
             }

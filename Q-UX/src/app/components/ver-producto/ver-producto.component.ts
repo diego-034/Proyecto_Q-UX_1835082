@@ -32,7 +32,7 @@ export class VerProductoComponent implements OnInit {
           .subscribe((data: any) => {
             this.product = data.data[0];
             this.loading = false
-          }, () => { // Captura de algun error
+          }, (err) => { // Captura de algun error
             this.error = true;
             this.loading = false;
           })

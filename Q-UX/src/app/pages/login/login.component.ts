@@ -51,22 +51,23 @@ export class LoginComponent implements OnInit {
 
       this.LoginService.login(email, password)
         .subscribe((data: any) => {
+          console.log(data);
 
-          if (!data.data[0].Estado) {
-            this.Router.navigate(['/login']);
-            return
+          if (data.token_type === "Bearer") {
+
+            Swal.fire({
+              allowOutsideClick: false,
+              icon:'info',
+              text: data.message,
+              timer: 500
+            });
+            Swal.showLoading();
+  
+            this.AuthService.setCookie(data.access_token, data.refresh_token);
+            this.Router.navigate(['/admin/home']);
+
           }
 
-          Swal.fire({
-            allowOutsideClick: false,
-            icon:'info',
-            text: data.message,
-            timer: 500
-          });
-          Swal.showLoading();
-
-          this.AuthService.setCookie(data.data[0].Token)
-          this.Router.navigate(['/admin/home']);
         }, (err) => {
           Swal.fire({
             icon:'error',

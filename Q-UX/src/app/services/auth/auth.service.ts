@@ -33,13 +33,14 @@ export class AuthService implements CanActivate {
     }
   }
 
-  setCookie(token) {
+  setCookie(token: string, refresh: string) {
     try {
 
-      if (token == null) {
+      if (token == null && refresh == null) {
         return
       }
-      sessionStorage.setItem('Token-TKN', token)
+      sessionStorage.setItem('Token-TKN', token);
+      sessionStorage.setItem('Refresh-TKN', refresh );
     } catch (error) {
       console.log(error)
       return
@@ -48,8 +49,9 @@ export class AuthService implements CanActivate {
 
   destroySesion() {
     try {
-
       sessionStorage.removeItem('Token-TKN');
+      sessionStorage.removeItem('Refresh-TKN');
+      
       return sessionStorage.getItem('Token-TKN')
     } catch (error) {
       console.log(error)

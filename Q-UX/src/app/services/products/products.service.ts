@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 //HttpClient dependencia para ahcer las peticiones
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +49,14 @@ export class ProductsService {
   addProducts(FormData) {
     try {
 
-      return this.http.post(this.url, FormData)
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem('Token-TKN')}`  
+        })
+      };
+      return this.http.post(this.url, FormData, httpOptions);
         
     } catch (error) {
       console.log(error)

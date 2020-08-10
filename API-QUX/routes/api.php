@@ -19,12 +19,13 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::post('login','UsersController@store');
 Route::get('products','ProductController@index');
-
+Route::get('products/{id}','ProductController@show');
 
 
 Route::group([ 'middleware'=>['auth:api','cors'] ], function(){
     Route::get('users','UsersController@index');
     Route::get('users/{id}','UsersController@show');
     Route::apiResource('clients','ClientController');
+    Route::post('products', 'ProductController@store');
     // Route::apiResource('products','ProductController');
 });
