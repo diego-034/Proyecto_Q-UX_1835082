@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 
+use App\Mail\recoveryPass;
+use Illuminate\Support\Facades\Mail;
+
+
 class UsersController extends Controller
 {
     /**
@@ -117,5 +121,19 @@ class UsersController extends Controller
         } catch (Exception $ex) {
             return $this->SendError($ex->__toString());
         }
+    }
+
+    public function recovery(Request $request)
+    {
+
+        $input = $request->all();
+
+        try {
+            Mail::to($input['email'])->send(new recoveryPass('Correo'));
+            return $this->SendResponse(null, "Se ha enviado un mensaje a la direccion de correo especificada"); 
+        } catch (Exception $ex) {
+            return $this->SendError($ex->__toString());
+        }
+        
     }
 }

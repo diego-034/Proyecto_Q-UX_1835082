@@ -105,9 +105,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product, $id)
     {
         try {
+
+            $product = Product::find($id);
             if ($product == null) {
                 return $this->SendError("error en los datos", ["el producto no existe"], 422);
             }
@@ -149,10 +151,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product, $id)
     {
+        
         try {
-            $product = Product::find($product['IdProducto']);
+            $product = Product::find($id);
             if ($product == null) {
                 return $this->SendError("error en los datos", ["el producto no existe"], 422);
             }
