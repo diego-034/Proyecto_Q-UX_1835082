@@ -26,5 +26,5 @@ Route::group([ 'middleware'=>['auth:api','cors'] ], function(){
     Route::get('users','UsersController@index');
     Route::get('users/{id}','UsersController@show');
     Route::apiResource('clients','ClientController');
-    Route::apiResource('products','ProductController');
+    // Route::apiResource('products','ProductController');
 });
