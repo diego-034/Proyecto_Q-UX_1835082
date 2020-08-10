@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('users','UsersController@store');
 
-Route::group(['middleware'=>'auth:api'], function(){
+Route::group([ 'middleware'=>['cors','auth:api'] ], function(){
     Route::get('users','UsersController@index');
     Route::get('users/{id}','UsersController@show');
     Route::apiResource('clients','ClientController');
