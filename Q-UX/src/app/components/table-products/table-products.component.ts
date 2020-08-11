@@ -67,7 +67,7 @@ export class TableProductsComponent implements OnInit {
 
   }
 
-  selectProduct(value:number) {
+  selectProduct(value:number, count) { // Subir el cambio
     try {
       this.ProductsService.selectProduct(value)
         .subscribe((data: any) => {

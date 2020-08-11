@@ -251,6 +251,56 @@ export class LoginComponent implements OnInit {
 
   }
 
+  /* Servicio para envio de datos para recuperar la contraseña */
+
+  sendMail(forma: NgForm) {
+
+    if(forma.invalid) {
+
+      Object.values(forma.controls).forEach(control => {
+        control.markAsTouched();
+      });
+
+      return;
+    }
+
+    var email = forma.controls.emailRecovery.value;
+
+    this.LoginService.recoveryPass(email)
+    .subscribe((data: any) => {
+      // console.log(data);
+      if(data.success) {
+       
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: data.message
+        })
+        forma.reset();
+      }
+    }, (err: any) => {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'No se ha podido enviar el mensaje'
+      })
+    });
+  }
+
   /* Resetear al salir del modal */
 
   reset() {

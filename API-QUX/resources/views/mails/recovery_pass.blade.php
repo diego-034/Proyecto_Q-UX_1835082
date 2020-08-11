@@ -6,6 +6,6 @@
     <title>Recuperación de contraseña</title>
 </head>
 <body>
-    <p>Hola!, Has decidido recuperar tu contraseña entra aquí.</p>
+    <p>Hola Diego!! Te has ganado un pase completo para el Developer Camp, solo tines que entrar <a href="http://localhost:4200/home"> aquí </a> y pagar $5 USD. Felicitaciones y gracias por participar.</p>
 </body>
 </html>

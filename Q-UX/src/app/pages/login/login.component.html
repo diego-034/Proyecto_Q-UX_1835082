@@ -187,14 +187,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form autocomplete="off">
-                    <input type="email" class="form-control" placeholder="E-mail">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success">Enviar</button>
-            </div>
+            <form (ngSubmit)="sendMail( formaMail )" #formaMail="ngForm" autocomplete="off">
+                <div class="modal-body">
+                    <input type="email" class="form-control" [class.is-invalid]="emailRecovery.invalid && emailRecovery.touched" name="emailRecovery" email ngModel #emailRecovery="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="E-mail" required>
+                    <small *ngIf="emailRecovery.invalid && emailRecovery.touched" class="text-danger">Campo Obligatorio</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-success">Enviar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -57,4 +57,15 @@ export class LoginService {
       return null
     }
   }
+
+  recoveryPass(email:string) {
+    var forma = {
+      "email": email
+    }
+    try {
+      return this.http.post(`${this.url}/recovery`, forma);
+    } catch (error) {
+      
+    }
+  }
 }

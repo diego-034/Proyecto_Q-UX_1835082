@@ -59,7 +59,7 @@ export class CarritoComprasService {
       if(this.paso) {
         var count = localStorage.getItem('cantidad');
         this.cantidad = parseInt(count);
-  
+
         if(this.cantidad === 0 ) {
           this.array = [];
         } else {
