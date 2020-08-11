@@ -1,6 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 
+// SweetAlert
+import Swal from '../../../assets/js/sweetalert2.all.min.js';
+
 @Component({
   selector: 'app-table-products',
   templateUrl: './table-products.component.html',
@@ -29,25 +32,46 @@ export class TableProductsComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteProduct(value, count) {
-    try {
+  deleteProduct(value:number, count:number) {
 
-      if (!this.ProductsService.deleteProducts(value)) {
-        alert("Ocurrio un error")
-        return
+    if(confirm("¿Eliminar Producto?")) {
+      try {
+        this.ProductsService.deleteProducts(value)
+        .subscribe((data: any) => {
+          if(!data.success) {
+            Swal.fire({
+              allowOutsideClick: false,
+              icon:'error',
+              text: data.message
+            });
+            return
+          }
+          this.products.splice(count, 1)
+          Swal.fire({
+            allowOutsideClick: false,
+            icon:'success',
+            text: data.message
+          });
+        }, (err:any) => {
+          Swal.fire({
+            allowOutsideClick: false,
+            icon:'error',
+            text: err.error
+          });
+        });
+
+      } catch (error) {
+        console.log(error)
       }
-      this.products.splice(count, 1)
-
-    } catch (error) {
-      console.log(error)
     }
+
   }
 
-  selectProduct(value, count) {
+  selectProduct(value:number) {
     try {
       this.ProductsService.selectProduct(value)
         .subscribe((data: any) => {
-
+          console.log(data);
           this.product.emit(data.data)
         })
     } catch (error) {

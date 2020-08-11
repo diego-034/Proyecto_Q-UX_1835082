@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProductsService } from '../../services/products/products.service';
+import { CarritoComprasService } from '../../services/carrito/carrito-compras.service';
+
 
 
 @Component({
@@ -18,7 +20,8 @@ export class VerProductoComponent implements OnInit {
   error: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private productsService: ProductsService) {
+              private productsService: ProductsService,
+              private carritoComprasService: CarritoComprasService) {
     this.loading = true;
     this.error = false;
   }
@@ -39,6 +42,17 @@ export class VerProductoComponent implements OnInit {
       } catch (error) {
         console.log(error)
       }
-    })
+    });
   }
+
+    /* Añadir al carrito, Guardar en el localStorage */
+
+    addCarrito() {
+
+      var id = this.product.IdProducto,
+      llave = id.toString();
+  
+      this.carritoComprasService.set(this.product);
+  
+    }
 }

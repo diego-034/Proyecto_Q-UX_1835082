@@ -1,3 +1,49 @@
-<div class="container">
-    <h1>Carrito de compras</h1>
+<div class="container mt-3">
+    <div class="d-flex align-items-center justify-content-between">
+        <h1>Carrito de compras</h1>
+        <a [routerLink]="['/products']" class="btn btn-outline-danger" style="height: 40px;">Regresar</a>
+    </div>
+
+    <div *ngIf="productos.length < 1" class="alert alert-info animated fadeIn mt-4">
+        <p class="text-center">No se ha encontrado contenido</p>
+    </div>
+
+    <!-- <div *ngIf="productos.length > 0 " class="d-flex justify-content-around mt-5"> -->
+    <div class="card-columns animated fadeIn" *ngIf="productos.length >= 1">
+        <div *ngFor="let product of productos; let i = index;" class="card">
+            <img src="https://dafitistaticco-a.akamaihd.net/p/color-siete-1662-32463-1-product.jpg" class="card-img-top" alt="..." style="height: 25rem;">
+            <div class="card-body">
+                <h5 class="card-title">Nombre : {{ product.Nombre }}</h5>
+                <h5 class="card-title">Color : {{ product.Color }}</h5>
+                <h5 class="card-title">Precio : ${{ product.Precio }}</h5>
+                <div>
+                    <button class="btn btn-outline-success btn-block"> Comprar </button>
+                    <button class="btn btn-outline-danger btn-block" (click)="remove(product.key, i); readLocalStorage()"> Eliminar </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="total-pagar mt-4 mb-4" style="width: 100%; background-color: #e1e1e1; padding: 40px; " *ngIf="productos.length >= 1">
+
+        <div class="row">
+            <div class="col-sm mb-5">
+                <h3>Productos: </h3>
+                <p class="descripcion">
+                    <p class="p-desc">Producto: camisa, camisa, camisa, camisa</p>
+                    <p class="p-desc">Color: azul</p>
+                    <p class="p-desc">Cantidad total: 10</p>
+                    <p class="p-desc">Tallas : L= 3, M= 3, S= 4</p>
+
+            </div>
+            <div class="col-sm">
+                <h3>Total a pagar:</h3>
+                <p class="precio-total"> nothing</p>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-success btn-block col-md-6 mx-auto"> Pagar </button>
+        </div>
+
+    </div>
 </div>

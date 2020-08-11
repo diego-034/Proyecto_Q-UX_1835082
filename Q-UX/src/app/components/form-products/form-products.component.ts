@@ -57,7 +57,6 @@ export class FormProductsComponent implements OnInit {
 
       var response = this.ProductsService.addProducts(this.formProducts.value)
       response.subscribe((data: any) => {
-        console.log(data)
         if (!data.success) { // Hay que organizar
           Swal.fire({
             icon:'error',
@@ -81,13 +80,9 @@ export class FormProductsComponent implements OnInit {
 
   updateProduct() {
     try {
-      var response = this.ProductsService.updateProducts(this.formProducts.get('IdProducto').value,this.formProducts.value)
+      var response = this.ProductsService.updateProducts(this.formProducts.get('IdProducto').value, this.formProducts.value)
       response.subscribe((data: any) => {
-        console.log(data)
-        if (!data.success) {
-          alert("No se pudo actualizar") // Hay que organizar
-          return
-        } else {
+        if (data.success) {
           Swal.fire({
             icon: "success",
             title: "Correcto",
@@ -95,6 +90,12 @@ export class FormProductsComponent implements OnInit {
           })
           this.Router.navigate(['/admin/home']);
         }
+      }, err => {
+        Swal.fire({
+          icon: "error",
+          title: "Error!!",
+          text: err.error.error
+        })
       })
     } catch (error) {
       console.log(error)

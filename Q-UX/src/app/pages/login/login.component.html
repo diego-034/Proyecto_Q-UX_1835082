@@ -3,29 +3,24 @@
     <div class="modal-dialog text-center">
         <div class="col-sm-8 main-section animated fadeIn fast">
             <div class="modal-content ingreso">
-
                 <div class="col-12 img-user">
                     <img class="rounded-circle" src="../../../assets/img/qux.jpg" alt="">
                 </div>
-
                 <form class="col-12" (ngSubmit)="login( forma )" #forma="ngForm" autocomplete="off">
                     <div class="form-group fgm-gr text-left" id="user-group">
                         <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="Correo" required>
-                        <span *ngIf="email.invalid && email.touched" class="animated fadeIn fast text-light">Campo Obligatorio</span>
                     </div>
-
+                    <span *ngIf="email.invalid && email.touched" class="animated fadeIn fast text-light">Campo Obligatorio</span>
                     <div class="form-group fgm-gr text-left" id="pass-group">
                         <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel" placeholder="Contraseña" minlength="6" required>
-                        <span *ngIf="password.invalid && password.touched" class="animated fadeIn fast text-light">Campo Obligatorio</span>
                     </div>
-
+                    <span *ngIf="password.invalid && password.touched" class="animated fadeIn fast text-light">Campo Obligatorio</span>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>   Ingresar</button>
                 </form>
-
                 <div class="col-12 forgot">
-                    <p data-toggle="modal" data-target="#staticBackdrop">Registrarse</p>
+                    <p data-toggle="modal" data-target="#staticBackdrop" (click)="forma.reset()">Registrarse</p>
                     <hr>
-                    <a href="#">Olvide la contraseña</a>
+                    <a data-toggle="modal" data-target="#exampleModal" (click)="forma.reset()">Olvide la contraseña</a>
                 </div>
             </div>
         </div>
@@ -50,7 +45,17 @@
             </div>
 
             <div class="modal-body">
-                <form [formGroup]="formUsers" (ngSubmit)="addUser()" autocomplete="off">
+                <!-- Seleccionar tipo de usuario -->
+                <div class="col-md-12">
+                    <select class="custom-select col-md-8 d-block mx-auto" name="select" id="select">
+                        <option value="" disabled selected>-- Seleccione un tipo de Registro --</option>
+                        <option *ngFor="let registro of tipoRegistro" [value]="registro.cod">{{ registro.name }}</option>
+                    </select>
+                </div>
+
+                <!-- FORMULARIO PARA EL ADMINISTRADOR -->
+                <form *ngIf="formaAdmin" [formGroup]="formAdmin" (ngSubmit)="addUser('admin')" autocomplete="off">
+                    <hr>
                     <div class="form-row mt-3">
                         <div class="form-group col-md-6 inputs">
                             <label for="nombres">Nombres</label>
@@ -108,6 +113,87 @@
                         <button type="submit" class="btn btn-primary col-md-2 d-block mx-auto">Registrarse</button>
                     </div>
                 </form>
+
+                <!-- FORMULARIO PARA EL USUARIO NORMAL -->
+
+                <form *ngIf="formaUser" [formGroup]="formUsers" (ngSubmit)="addUser('user')" autocomplete="off">
+
+                    <hr>
+
+                    <div class="form-row mt-3">
+                        <div class="form-group col-md-6 inputs">
+                            <label for="nombres">Nombres</label>
+                            <input type="text" class="form-control" formControlName="NombreUsuario" id="nombre" placeholder="Nombre">
+                            <!-- <small *ngIf="nombreNoValido" class="text-danger">Ingrese 3 letras</small> -->
+                        </div>
+
+                        <div class="form-group col-md-6 inputs">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" class="form-control" formControlName="ApellidoUsuario" id="apellido" placeholder="Apellido">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6 inputs">
+                            <label for="celular">Celular</label>
+                            <input type="text" class="form-control" formControlName="CelularUsuario" id="celular" placeholder="Celular: 000 123 5678">
+                            <!-- <small *ngIf="celularNoValido" class="text-danger">Ingrese solo números</small> -->
+                        </div>
+
+                        <div class="form-group col-md-6 inputs">
+                            <label for="edad">Edad</label>
+                            <input type="date" class="form-control" formControlName="EdadUsuario" id="edad" placeholder="Edad">
+                            <!-- <small *ngIf="nitNoValido" class="text-danger">Ingrese solo números</small> -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6 inputs">
+                            <label for="e-mail">Correo</label>
+                            <input type="text" class="form-control" formControlName="CorreoUsuario" id="e-mail" placeholder="E-mail">
+                            <!-- <small *ngIf="correoNoValido" class="text-danger">Ingrese un correo valido</small> -->
+                        </div>
+
+                        <div class="form-group col-md-3 inputs">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" formControlName="pass1Usuario" id="password" placeholder="Contraseña">
+                            <!-- <small *ngIf="pass1NoValido" class="text-danger">Minimo 6 caracteres</small> -->
+                        </div>
+
+                        <div class="form-group col-md-3 inputs">
+                            <label for="password2"> Repetir </label>
+                            <input type="password" class="form-control" formControlName="pass2Usuario" id="password2" placeholder="Repita la contraseña">
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex  justify-content-end">
+                        <button type="submit" class="btn btn-primary col-md-2 d-block mx-auto">Registrarse</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal para recuperación de contraseña-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ingrese el correo de recuperación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off">
+                    <input type="email" class="form-control" placeholder="E-mail">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success">Enviar</button>
             </div>
         </div>
     </div>

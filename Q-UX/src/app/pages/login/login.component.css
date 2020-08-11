@@ -36,35 +36,42 @@
     box-shadow: 0px 0px 3px #848484;
 }
 
+.fgm-gr {
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
+    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+}
+
+input#email-init:focus,
+input#password-init:focus {
+    box-shadow: none;
+}
+
 .fgm-gr input {
     height: 40px;
     font-size: 18px;
-    padding-left: 55px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+}
+
+.fgm-gr input::placeholder {
+    color: white;
+    font-size: 17px;
+}
+
+span.text-light {
+    display: inline-block;
+    margin-bottom: 1rem;
 }
 
 hr {
     border: 1px solid black;
 }
 
-.fgm-gr::before {
-    font-family: "Font Awesome\ 5 free";
-    position: absolute;
-    left: 28px;
-    font-size: 22px;
-    padding-top: 4px;
-}
-
-.fgm-gr#user-group::before {
-    content: "\f007";
-}
-
-.fgm-gr#pass-group::before {
-    content: "\f502";
-}
-
 .col-12 button {
-    width: 60%;
-    margin: 5px 0 25px;
+    width: 100%;
+    margin: 25px 0 25px;
 }
 
 .forgot p,
