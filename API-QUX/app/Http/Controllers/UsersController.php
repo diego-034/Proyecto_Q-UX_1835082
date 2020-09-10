@@ -126,11 +126,21 @@ class UsersController extends Controller
     public function recovery(Request $request)
     {
 
-        $input = $request->all();
-
         try {
+            $input = $request->all();
+
+            $email = $input['email'];
+
+            $users = DB::table('users')
+            ->select('email')
+            ->where('email', '=', $email)->get();
+    
+            if(empty($users[0]->email)) {
+                return $this->SendError($users, ["Usuario no existe"], 200);
+            }
+            
             Mail::to($input['email'])->send(new recoveryPass('Correo'));
-            return $this->SendResponse(null, "Se ha enviado un mensaje a la direccion de correo especificada"); 
+            return $this->SendResponse($users, "Se ha enviado un mensaje a la direccion de correo especificada"); 
         } catch (Exception $ex) {
             return $this->SendError($ex->__toString());
         }

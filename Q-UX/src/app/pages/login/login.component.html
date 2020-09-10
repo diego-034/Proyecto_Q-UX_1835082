@@ -183,14 +183,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Ingrese el correo de recuperación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close recovery" data-dismiss="modal" aria-label="Close" (click)="formaMail.reset()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form (ngSubmit)="sendMail( formaMail )" #formaMail="ngForm" autocomplete="off">
                 <div class="modal-body">
                     <input type="email" class="form-control" [class.is-invalid]="emailRecovery.invalid && emailRecovery.touched" name="emailRecovery" email ngModel #emailRecovery="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" placeholder="E-mail" required>
-                    <small *ngIf="emailRecovery.invalid && emailRecovery.touched" class="text-danger">Campo Obligatorio</small>
+                    <small *ngIf="emailRecovery.invalid && emailRecovery.touched" class="text-danger">Ingrese un E-mail valido </small>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-success">Enviar</button>

@@ -19,7 +19,7 @@ class ClientController extends Controller
     {
         try {
 
-            $client = Client::all();
+            $client = Client::all(); 
 
             if ($client == null) {
                 return $this->SendError("Error de consulta de clientes");

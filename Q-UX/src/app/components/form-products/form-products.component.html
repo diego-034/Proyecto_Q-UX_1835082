@@ -6,9 +6,10 @@
     <div class="form-row mb-4">
         <div class="col">
             <!-- First name -->
-            <input type="number" id="Name" formControlName="IdProducto" class="form-control" style="display: none;">
+            <input type="number" id="id_producto" formControlName="IdProducto" class="form-control" style="display: none;">
 
-            <input type="text" id="Name" formControlName="Nombre" class="form-control" placeholder="Nombre del Producto">
+            <input type="text" id="Name" class="form-control" [class.is-invalid]="nombreNoValido" formControlName="Nombre" placeholder="Nombre del Producto">
+            <small *ngIf="nombreNoValido" class="text-danger">Ingrese 3 letras</small>
         </div>
         <div class="col">
             <!-- Last name -->
@@ -21,41 +22,49 @@
 
     <!--Description-->
     <div class="form-group">
-        <textarea class="form-control rounded-0" id="Description" formControlName="Descripcion" rows="3" placeholder="Descripcion"></textarea>
+        <textarea class="form-control rounded-0" [class.is-invalid]="descripcionNoValido" id="descripcionNoValido" formControlName="Descripcion" rows="3" placeholder="Descripcion"></textarea>
+        <small *ngIf="descripcionNoValido" class="text-danger">Ingrese una descripción válida</small>
     </div>
 
     <!-- Color -->
     <div class="input-group mb-3">
-        <input type="text" id="Color" class="form-control" formControlName="Color" placeholder="Color">
+        <input type="text" id="Color" class="form-control" [class.is-invalid]="colorNoValido" formControlName="Color" placeholder="Color">
+        <small *ngIf="colorNoValido" class="text-danger">Ingrese un Color</small>
     </div>
 
     <div class="form-row mb-4">
         <div class="col">
             <!-- Precio -->
-            <input type="number" id="Price" class="form-control" formControlName="Precio" placeholder="Precio">
+            <input type="number" id="Price" class="form-control" [class.is-invalid]="precioNoValido" formControlName="Precio" placeholder="Precio">
+            <small *ngIf="precioNoValido" class="text-danger">Ingrese el Precio</small>
         </div>
         <div class="col">
             <!-- Descuento -->
-            <input type="number" id="Discount" class="form-control" formControlName="Descuento" placeholder="Descuento">
+            <input type="number" id="Discount" class="form-control" [class.is-invalid]="descuentoNoValido" formControlName="Descuento" placeholder="Descuento">
+            <!-- <small *ngIf="descuentoNoValido" class="text-danger"></small> -->
         </div>
         <div class="col">
             <!-- Iva -->
-            <input type="text" id="Iva" class="form-control" formControlName="IVA" placeholder="IVA 19%" disabled>
+            <input type="text" id="Iva" class="form-control" [class.is-invalid]="ivaNoValido" formControlName="IVA" placeholder="IVA 19%" value="IVA 19%" disabled>
+            <!-- <small *ngIf="ivaNoValido" class="text-danger"></small> -->
         </div>
     </div>
 
     <div class="form-row mb-4">
         <div class="col">
             <span>Talla S</span>
-            <input type="number" min="0" pattern="^[0-100]+" id="SizeS" placeholder="0" formControlName="TallaS" class="form-control">
+            <input type="number" id="SizeS" class="form-control" [class.is-invalid]="tallaSNoValido" formControlName="TallaS" placeholder="0" min="0">
+            <small *ngIf="tallaSNoValido" class="text-danger">Ingrese 3 letras</small>
         </div>
         <div class="col">
             <span>Talla M</span>
-            <input type="number" min="0" pattern="^[0-100]+" id="SizeM" placeholder="0" formControlName="TallaM" class="form-control">
+            <input type="number" id="SizeM" class="form-control" [class.is-invalid]="tallaMNoValido" formControlName="TallaM" placeholder="0" min="0">
+            <small *ngIf="tallaMNoValido" class="text-danger">Ingrese 3 letras</small>
         </div>
         <div class="col">
             <span>Talla L</span>
-            <input type="number" min="0" pattern="^[0-100]+" id="SizeL" placeholder="0" formControlName="TallaL" class="form-control">
+            <input type="number" id="SizeL" class="form-control" [class.is-invalid]="tallaLNoValido" formControlName="TallaL" placeholder="0" min="0">
+            <small *ngIf="tallaLNoValido" class="text-danger">Ingrese 3 letras</small>
         </div>
     </div>
 

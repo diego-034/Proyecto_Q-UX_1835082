@@ -19,7 +19,7 @@ export class ValidadoresService {
 
   /* Evitar espacios en blanco */
   espaciosEnBlanco( control: FormControl ): ErrorValidate {
-    const espacioBlanco = (control.value || '').trim().length === 0;
+    const espacioBlanco = (control.value || '').length === 0;
     const esValido = espacioBlanco;
     return esValido ? { espacioBlanco: true } : null;
   }

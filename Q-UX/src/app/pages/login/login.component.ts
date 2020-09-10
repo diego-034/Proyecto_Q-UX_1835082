@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
-
-import { LoginService } from 'src/app/services/login/login.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';  
+import { Router } from '@angular/router'; 
 
 // Servicios
+import { LoginService } from 'src/app/services/login/login.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { ValidadoresService } from '../../services/validadores.service';
 
 // SweetAlert
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
   formValid: boolean = true;
   formaAdmin: boolean = false;
   formaUser: boolean = false;
-  tipoRegistro: any[] = [
+  tipoRegistro: any[] = [ // Tipo de registro al que tendra acceso el usuario
     {
       "name": "Usuario-Comprador",
       "cod" : "uc"
@@ -42,18 +41,20 @@ export class LoginComponent implements OnInit {
               private validadores: ValidadoresService) { }
 
   ngOnInit(): void {
-    var eleccion = $('#select');
+    var eleccion = $('#select'); // Elegimos el tipo de usurio
 
     eleccion.on('change', () => {
-      if(eleccion.val() === "uc") {
+      if(eleccion.val() === "uc") { // Elegimos usuraio comprador
         this.formaAdmin = false;
         this.formaUser = true;
+
         if(this.formAdmin.invalid) {
           this.formValid = true;
           this.formInvalid = false;
           this.formAdmin.reset();
         }
-      } else if(eleccion.val() === "av") {
+
+      } else if(eleccion.val() === "av") { // Elegimos usuario vendedor
         this.formaUser = false;
         this.formaAdmin = true;
       }
@@ -62,9 +63,9 @@ export class LoginComponent implements OnInit {
 
   login( forma: NgForm ) {
     // console.log(forma.controls);      
-    if(forma.invalid) {
+    if(forma.invalid) { // Verificamos si el formulario es invalido
 
-      Object.values(forma.controls).forEach(control => {
+      Object.values(forma.controls).forEach(control => { // Si es invalido marcamos todas las casillas invalidas de rojo
         control.markAsTouched();
       });
 
@@ -74,7 +75,7 @@ export class LoginComponent implements OnInit {
       var email = forma.controls.email.value;
       var password = forma.controls.password.value;
 
-      this.LoginService.login(email, password)
+      this.LoginService.login(email, password) // Enviamos los valores para corroborar que sean correctos 
         .subscribe((data: any) => {
           console.log(data);
 
@@ -93,6 +94,7 @@ export class LoginComponent implements OnInit {
             }, 500);
             
           }
+
         }, (err) => {
           console.log(err);
           if(err.status === 400) {
@@ -125,7 +127,8 @@ export class LoginComponent implements OnInit {
   /* Validaciones para los input del registro */
 
   /* Nombre y apellido */
-  get nombreNoValido() { // esto es un getter en una clase, es una forma de obtener una propiedad, lo que hace es prosesar la información.
+  // esto es un getter en una clase, es una forma de obtener una propiedad, lo que hace es prosesar la información.
+  get nombreNoValido() { 
     return this.formAdmin.get('Nombres').invalid && this.formAdmin.get('Nombres').touched;
   }
   get apellidoNoValido() {
@@ -158,7 +161,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  /* Creación de formGroup para Administradores */
+  /* Creación de formGroup para Administradores y validaciones */
   formAdmin = new FormGroup({
     Nombres   : new FormControl('', [ Validators.required, Validators.minLength(2), this.validadores.espaciosEnBlanco ]),
     Apellidos : new FormControl('', [ Validators.required, Validators.minLength(4), this.validadores.espaciosEnBlanco ]),
@@ -170,7 +173,7 @@ export class LoginComponent implements OnInit {
     pass2     : new FormControl('', [ Validators.required, Validators.minLength(6) ])
   });
 
-  /* Creación del formGruop para Compradores */
+  /* Creación del formGruop para Compradores y validaciones*/
   formUsers = new FormGroup({
     NombreUsuario   : new FormControl('', [ Validators.required, Validators.minLength(2) , this.validadores.espaciosEnBlanco ]),
     ApellidoUsuario : new FormControl('', [ Validators.required, Validators.minLength(4) , this.validadores.espaciosEnBlanco ]),
@@ -189,7 +192,7 @@ export class LoginComponent implements OnInit {
 
     if(forma === "admin") {
 
-      /* Para la validacion del formulario de Administradores */  
+      /* Para la validacion del formulario de Administradores, si hay algo mal se marcara con rojo*/  
       if(this.formAdmin.invalid) {
         return Object.values(this.formAdmin.controls).forEach(control => {
 
@@ -198,12 +201,14 @@ export class LoginComponent implements OnInit {
           }else {
             control.markAsTouched();
           }
+
         });
       }
 
       try {
-        var response = this.LoginService.addUsers(this.formAdmin.value)
+        var response = this.LoginService.addUsers(this.formAdmin.value) // Enviamos los datos a guardar
         response.subscribe((data: any) => {
+
           if (!data.success) {
             Swal.fire({
               allowOutsideClick: false,
@@ -212,14 +217,15 @@ export class LoginComponent implements OnInit {
               text: "No se pudo añadir",
             });
             return
-          } else {
-            Swal.fire({
-              allowOutsideClick: false,
-              icon:'success',
-              text: "Registrado Correctamente"
-            });
-            this.formAdmin.reset();
           }
+
+          Swal.fire({
+            allowOutsideClick: false,
+            icon:'success',
+            text: "Registrado Correctamente"
+          });
+          this.formAdmin.reset();
+          
         }, err => {
           Swal.fire({
             allowOutsideClick: false,
@@ -235,7 +241,7 @@ export class LoginComponent implements OnInit {
     } 
     else if(forma === "user") {
 
-      /* Para la validacion del frormulario de Usuarios */      
+      /* Para la validacion del formulario de Usuarios, si hay algo mal se marcara con rojo */      
       if(this.formUsers.invalid) {
         return Object.values(this.formUsers.controls).forEach(control => {
 
@@ -255,7 +261,7 @@ export class LoginComponent implements OnInit {
 
   sendMail(forma: NgForm) {
 
-    if(forma.invalid) {
+    if(forma.invalid) { // Esto es por si envia el inout vacio
 
       Object.values(forma.controls).forEach(control => {
         control.markAsTouched();
@@ -268,23 +274,28 @@ export class LoginComponent implements OnInit {
 
     this.LoginService.recoveryPass(email)
     .subscribe((data: any) => {
-      // console.log(data);
+      console.log(data);
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      })
       if(data.success) {
-       
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        })
-        
         Toast.fire({
           icon: 'success',
           title: data.message
         })
         forma.reset();
+      } else {
+        Toast.fire({
+          icon: 'error',
+          title: data.message
+        })
       }
+
     }, (err: any) => {
       const Toast = Swal.mixin({
         toast: true,
@@ -296,7 +307,7 @@ export class LoginComponent implements OnInit {
       
       Toast.fire({
         icon: 'error',
-        title: 'No se ha podido enviar el mensaje'
+        title: 'Error del servidor'
       })
     });
   }
