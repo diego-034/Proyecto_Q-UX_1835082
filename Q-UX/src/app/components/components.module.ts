@@ -28,7 +28,7 @@ import { LoadingComponent } from './loading/loading.component';
     ErrorComponent,
     LoadingComponent
   ],
-  exports: [ // esto es para exportar los componentes que aquí tenemos
+  exports: [ // esto es para exportar los componentes que aquí tenemos ************
     NavbarComponent,
     FooterComponent,
     ProductComponent,

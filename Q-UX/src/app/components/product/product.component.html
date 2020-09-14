@@ -1,6 +1,9 @@
+<!-- Renderizamos el componente de loading y lo mostramos o no según el valor de loading-->
 <app-loading *ngIf="loading" class="m-5"></app-loading>
+<!-- Renderizamos el componente de error y lo mostramos o no según el valor de error-->
 <app-error *ngIf="error" class="m-5"></app-error>
 
+<!-- barra de error en el caso de que no encuentre contenido -->
 <div *ngIf="noFound" class="alert alert-info animated fadeIn">
     <h3>ERROR</h3>
     <p>No se ha encontrado contenido</p>

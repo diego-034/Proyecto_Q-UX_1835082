@@ -27,13 +27,14 @@ export class VerProductoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    // Seleccionamos un producto para poder verlo luego
     this.activatedRoute.params.subscribe( params => {
-      this.id = params.id
+      this.id = params.id // obtenemos el id que resivimos por la URL y se lo asignamos a id.
       try {
-        this.productsService.selectProduct(this.id)
+        // enviamos el id a productsService llamando la función para seleccionar un producto y resivimos las respuesta con el .subscribe
+        this.productsService.selectProduct(this.id) 
           .subscribe((data: any) => {
-            this.product = data.data[0];
+            this.product = data.data[0]; // añadimos el producto encontrado a product para luego mostrarlo en la vista
             this.loading = false
           }, (err) => { // Captura de algun error
             this.error = true;
@@ -49,9 +50,9 @@ export class VerProductoComponent implements OnInit {
 
     addCarrito() {
 
-      var id = this.product.IdProducto,
-      llave = id.toString();
-  
+      // var id = this.product.IdProducto,
+      // llave = id.toString();
+      //enviamos el producto al servicio carritoComprasService y usamos la función set de esta
       this.carritoComprasService.set(this.product);
   
     }

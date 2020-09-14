@@ -20,11 +20,16 @@ declare var $: any;
 
 export class LoginComponent implements OnInit {
 
+  /* variables para el manejo de errores */
   formInvalid: boolean;
   formValid: boolean = true;
+
+  // variables para manejar que formulario mostramos
   formaAdmin: boolean = false;
   formaUser: boolean = false;
-  tipoRegistro: any[] = [ // Tipo de registro al que tendra acceso el usuario
+
+  // Tipo de registro al que tendra acceso el usuario
+  tipoRegistro: any[] = [
     {
       "name": "Usuario-Comprador",
       "cod" : "uc"
@@ -41,13 +46,14 @@ export class LoginComponent implements OnInit {
               private validadores: ValidadoresService) { }
 
   ngOnInit(): void {
-    var eleccion = $('#select'); // Elegimos el tipo de usurio
+    var eleccion = $('#select'); // Elegimos el tipo de usuario que podemos escojer en un select
 
     eleccion.on('change', () => {
-      if(eleccion.val() === "uc") { // Elegimos usuraio comprador
+      if(eleccion.val() === "uc") { // Elegimos usuario comprador
         this.formaAdmin = false;
-        this.formaUser = true;
+        this.formaUser = true; // con este mostramos el formulario de Usuario
 
+        // Si previamente habiamos entrado en en formulario de Administrador y por algo este quedo inválido, con las lineas acontinuación lo reseteamos para que este limpio 
         if(this.formAdmin.invalid) {
           this.formValid = true;
           this.formInvalid = false;
@@ -56,29 +62,40 @@ export class LoginComponent implements OnInit {
 
       } else if(eleccion.val() === "av") { // Elegimos usuario vendedor
         this.formaUser = false;
-        this.formaAdmin = true;
+        this.formaAdmin = true;// con este mostramos el formulario de Administrador
+
+        // Si previamente habiamos entrado en en formulario de Usuario y por algo este quedo inválido, con las lineas acontinuación lo reseteamos para que este limpio 
+        if(this.formUsers.invalid) {
+          this.formValid = true;
+          this.formInvalid = false;
+          this.formUsers.reset();
+        }
       }
     });
   }
 
   login( forma: NgForm ) {
-    // console.log(forma.controls);      
-    if(forma.invalid) { // Verificamos si el formulario es invalido
+    // console.log(forma.controls);
 
-      Object.values(forma.controls).forEach(control => { // Si es invalido marcamos todas las casillas invalidas de rojo
+    // Verificamos si el formulario enviado es invalido      
+    if(forma.invalid) { 
+
+      Object.values(forma.controls).forEach(control => { // Si el formulario es invalido le ponemos un borde rojo a las cajas de texto
         control.markAsTouched();
       });
 
       return;
     }
     try{
-      var email = forma.controls.email.value;
+      var email = forma.controls.email.value; // en esta y la siguiente linea estamos tomando el valor de las cajas de texto que se ha enviado
       var password = forma.controls.password.value;
 
-      this.LoginService.login(email, password) // Enviamos los valores para corroborar que sean correctos 
+      // Enviamos los valores obtenidos para corroborar que sean correctos y obtenemos una respuesta
+      this.LoginService.login(email, password) 
         .subscribe((data: any) => {
           console.log(data);
 
+          // Si es correcta la respuesta que tenemos nos redigira a la pantalla de incio
           if (data.token_type === "Bearer") {
 
             Swal.fire({
@@ -88,14 +105,16 @@ export class LoginComponent implements OnInit {
               timer: 500
             });
             Swal.showLoading();
+            // Enviamos al servicio AuthService en la función setCookie el token de acceso y el token para refrescar
             this.AuthService.setCookie(data.access_token, data.refresh_token);
             setTimeout(() => {
-              this.Router.navigate(['/admin/home']);
+              this.Router.navigate(['/admin/home']); // redirigimos a la página principal de Admin
             }, 500);
             
           }
 
         }, (err) => {
+          // Aquí revisamos las distintas causas que pueden dar un error
           console.log(err);
           if(err.status === 400) {
             Swal.fire({
@@ -125,9 +144,9 @@ export class LoginComponent implements OnInit {
   }
 
   /* Validaciones para los input del registro */
-
-  /* Nombre y apellido */
-  // esto es un getter en una clase, es una forma de obtener una propiedad, lo que hace es prosesar la información.
+  
+  // esto es un getter en una clase, es una forma de obtener una propiedad, lo que hace es prosesar la información para verificar que sea correcta.
+  // Verifica que si lo que se obtiene de las cajas de text por medio del get() es invalido y si ya el usuario hizo click en el.
   get nombreNoValido() { 
     return this.formAdmin.get('Nombres').invalid && this.formAdmin.get('Nombres').touched;
   }
@@ -155,44 +174,43 @@ export class LoginComponent implements OnInit {
       const pass1 = this.formAdmin.get('pass1').value;
       const pass2 = this.formAdmin.get('pass2').value;
 
-      return (pass1 === pass2) ? false : true;
+      return (pass1 === pass2) ? false : true; // Verificamos que las contraseñas coincidan y retornamos dependiendo del resultado
     }else {
       return false;
     }
   }
 
   /* Creación de formGroup para Administradores y validaciones */
+  // Aquí estamos creando un formato para le envio de los datos
   formAdmin = new FormGroup({
-    Nombres   : new FormControl('', [ Validators.required, Validators.minLength(2), this.validadores.espaciosEnBlanco ]),
-    Apellidos : new FormControl('', [ Validators.required, Validators.minLength(4), this.validadores.espaciosEnBlanco ]),
-    Telefono  : new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$"),this.validadores.espaciosEnBlanco ]),
-    Celular   : new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$"),this.validadores.espaciosEnBlanco ]),
-    NIT       : new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$"),this.validadores.espaciosEnBlanco ]),
-    Correo    : new FormControl('', [ Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$"), this.validadores.espaciosEnBlanco ]),
-    pass1     : new FormControl('', [ Validators.required, Validators.minLength(6) ]),
-    pass2     : new FormControl('', [ Validators.required, Validators.minLength(6) ])
+    Nombres   : new FormControl('', [ Validators.required, Validators.pattern("^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"), Validators.minLength(2), this.validadores.espaciosEnBlanco ]),
+    Apellidos : new FormControl('', [ Validators.required, Validators.pattern("^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"), Validators.minLength(4), this.validadores.espaciosEnBlanco ]),
+    Telefono  : new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$"), this.validadores.espaciosEnBlanco ]),
+    Celular   : new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(11), this.validadores.espaciosEnBlanco ]),
+    NIT       : new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$"), this.validadores.espaciosEnBlanco ]),
+    Correo    : new FormControl('', [ Validators.required, Validators.pattern("[a-z0-9._+-]+@[a-z0-9-]+\.[a-z]{2,3}$"), this.validadores.espaciosEnBlanco ]),
+    pass1     : new FormControl('', [ Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,16}") ]),
+    pass2     : new FormControl('', [ Validators.required, Validators.minLength(8), Validators.maxLength(16) ])
   });
 
   /* Creación del formGruop para Compradores y validaciones*/
+  // Aquí estamos creando un formato para le envio de los datos
   formUsers = new FormGroup({
-    NombreUsuario   : new FormControl('', [ Validators.required, Validators.minLength(2) , this.validadores.espaciosEnBlanco ]),
-    ApellidoUsuario : new FormControl('', [ Validators.required, Validators.minLength(4) , this.validadores.espaciosEnBlanco ]),
-    CelularUsuario  : new FormControl('', [ Validators.required, Validators.minLength(7) , Validators.pattern("^[0-9]*$"),this.validadores.espaciosEnBlanco ]),
-    EdadUsuario     : new FormControl('', [ Validators.required, Validators.minLength(2) , Validators.pattern("^[0-9]*$"),this.validadores.espaciosEnBlanco ]),
-    CorreoUsuario   : new FormControl('', [ Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,3}$"), this.validadores.espaciosEnBlanco ]),
-    pass1Usuario    : new FormControl('', [ Validators.required, Validators.minLength(6) ]),
-    pass2Usuario    : new FormControl('', [ Validators.required, Validators.minLength(6) ])
+    NombreUsuario   : new FormControl('', [ Validators.required, Validators.pattern("^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"), Validators.minLength(2) , this.validadores.espaciosEnBlanco ]),
+    ApellidoUsuario : new FormControl('', [ Validators.required, Validators.pattern("^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"), Validators.minLength(4) , this.validadores.espaciosEnBlanco ]),
+    CelularUsuario  : new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), this.validadores.espaciosEnBlanco ]),
+    EdadUsuario     : new FormControl('', [ Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(2),  this.validadores.espaciosEnBlanco ]),
+    CorreoUsuario   : new FormControl('', [ Validators.required, Validators.pattern("[a-z0-9._+-]+@[a-z0-9-]+\.[a-z]{2,3}$"), this.validadores.espaciosEnBlanco ]),
+    pass1Usuario    : new FormControl('', [ Validators.required, Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,16}") ]),
+    pass2Usuario    : new FormControl('', [ Validators.required, Validators.minLength(8), Validators.maxLength(16) ])
   })
-
-  /* Anadir Uasuarios */
-
+  
+  /* Anadir Usuarios */
   addUser(forma: string) {
-    this.formInvalid = this.formUsers.invalid;
-    this.formValid   = this.formUsers.valid;
 
     if(forma === "admin") {
 
-      /* Para la validacion del formulario de Administradores, si hay algo mal se marcara con rojo*/  
+      /* Validación del formulario de Administradores, si alguna caja de texto no esta correctamente diligenciada se tornara de color rojo el borde de la caja de texto*/  
       if(this.formAdmin.invalid) {
         return Object.values(this.formAdmin.controls).forEach(control => {
 
@@ -204,6 +222,10 @@ export class LoginComponent implements OnInit {
 
         });
       }
+      // resetamos las validaciones para evitar que se muestre algo que no es acorde a lo que hacemos
+      this.formInvalid = false;
+      this.formValid   = true;
+
 
       try {
         var response = this.LoginService.addUsers(this.formAdmin.value) // Enviamos los datos a guardar
@@ -227,11 +249,14 @@ export class LoginComponent implements OnInit {
           this.formAdmin.reset();
           
         }, err => {
+          // console.log(err);
+          // if(err.error.error == "PDOException") { }
           Swal.fire({
             allowOutsideClick: false,
             icon:'error',
             title: 'Error!!!',
-            text: err.error.error
+            // text: err.error.error
+            text: "Error Servidor"
           });
         })
       } catch (error) {
@@ -241,7 +266,7 @@ export class LoginComponent implements OnInit {
     } 
     else if(forma === "user") {
 
-      /* Para la validacion del formulario de Usuarios, si hay algo mal se marcara con rojo */      
+      /* Validación del formulario de Usuarios, si alguna caja de texto no esta correctamente diligenciada se tornara de color rojo el borde de la caja de texto*/      
       if(this.formUsers.invalid) {
         return Object.values(this.formUsers.controls).forEach(control => {
 
@@ -252,16 +277,19 @@ export class LoginComponent implements OnInit {
           }
         });
       }
+      // resetamos las validaciones para evitar que se muestre algo que no es acorde a lo que hacemos
+      this.formInvalid = false;
+      this.formValid   = true;
 
     }
 
   }
 
   /* Servicio para envio de datos para recuperar la contraseña */
-
   sendMail(forma: NgForm) {
 
-    if(forma.invalid) { // Esto es por si envia el inout vacio
+    // aquí verificamos que el input del correo a enviar no este vacio
+    if(forma.invalid) { 
 
       Object.values(forma.controls).forEach(control => {
         control.markAsTouched();
@@ -270,12 +298,14 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    var email = forma.controls.emailRecovery.value;
+    var email = forma.controls.emailRecovery.value; // Tomamos el valor del input
 
+    // Llamamos el servicio de recuperación de contraseña y resivimos una respuesta
     this.LoginService.recoveryPass(email)
     .subscribe((data: any) => {
       console.log(data);
 
+      // Esto es de la libreria de SweetAlert
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -297,6 +327,7 @@ export class LoginComponent implements OnInit {
       }
 
     }, (err: any) => {
+      // En esta parte capturamos algún tipo de error que puede generar el servidor y el envio de datos a la base de datos y a la api
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -312,15 +343,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  /* Resetear al salir del modal */
-
+  /* Resetear formularios para evitar que siga mostrando errores o información al salir de el */
   reset() {
     this.formAdmin.reset();
     this.formUsers.reset();
-    this.formValid = true;
-    this.formInvalid = false;
     this.formaAdmin = false;
     this.formaUser = false;
+    
+    this.formValid = true;
+    this.formInvalid = false;
+
 
     /* Resetamos el Select */
     $("#select").val($("#select option:first").val());

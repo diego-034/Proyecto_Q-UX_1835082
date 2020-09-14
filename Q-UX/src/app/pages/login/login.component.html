@@ -1,5 +1,5 @@
 <div class="r-main">
-
+    <!-- Formulaio de ingreso al sistema -->
     <div class="modal-dialog text-center">
         <div class="col-sm-8 main-section animated fadeIn fast">
             <div class="modal-content ingreso">
@@ -60,13 +60,13 @@
                         <div class="form-group col-md-6 inputs">
                             <label for="nombres">Nombres</label>
                             <input type="text" class="form-control" [class.is-invalid]="nombreNoValido" formControlName="Nombres" id="nombres" placeholder="Nombre">
-                            <small *ngIf="nombreNoValido" class="text-danger">Ingrese 3 letras</small>
+                            <small *ngIf="nombreNoValido" class="text-danger">Ingrese un nombre válido. (Solo letras)</small>
                         </div>
 
                         <div class="form-group col-md-6 inputs">
                             <label for="apellidos">Apellidos</label>
                             <input type="text" class="form-control" [class.is-invalid]="apellidoNoValido" formControlName="Apellidos" id="apellidos" placeholder="Apellido">
-                            <small *ngIf="apellidoNoValido" class="text-danger">Ingrese 4 letras</small>
+                            <small *ngIf="apellidoNoValido" class="text-danger">Ingrese un apellido válido. (Solo letras)</small>
                         </div>
                     </div>
 
@@ -93,19 +93,20 @@
                     <div class="form-row">
                         <div class="form-group col-md-6 inputs">
                             <label for="e-mail">Correo</label>
-                            <input type="text" class="form-control" [class.is-invalid]="correoNoValido" formControlName="Correo" id="e-mail" placeholder="E-mail">
-                            <small *ngIf="correoNoValido" class="text-danger">Ingrese un correo valido</small>
+                            <input type="text" class="form-control" [class.is-invalid]="correoNoValido" formControlName="Correo" id="e-mail" placeholder="example@example.com">
+                            <small *ngIf="correoNoValido" class="text-danger">Ingrese un email válido <br> Soló caracteres .-_ </small>
                         </div>
 
                         <div class="form-group col-md-3 inputs">
                             <label for="inputPassword">Contraseña</label>
                             <input type="password" class="form-control" [class.is-invalid]="pass1NoValido" formControlName="pass1" id="inputPassword" placeholder="Contraseña">
-                            <small *ngIf="pass1NoValido" class="text-danger">Minimo 6 caracteres</small>
+                            <small *ngIf="pass1NoValido" class="text-danger">Campo obligatorio <br> Ingrese una contraseña válida. (De 8 a 16 caracteres, al menos una letra minúscula, una mayúscula un número y un caracter de estos $!%*?& ) </small>
                         </div>
 
                         <div class="form-group col-md-3 inputs">
                             <label for="inputPassword"> Repetir </label>
                             <input type="password" class="form-control" [class.is-invalid]="pass2NoValido" formControlName="pass2" id="inputPassword2" placeholder="Repita la contraseña">
+                            <small *ngIf="pass2NoValido" class="text-danger">Las contraseñas no coinciden</small>
                         </div>
                     </div>
 
@@ -141,8 +142,8 @@
                         </div>
 
                         <div class="form-group col-md-6 inputs">
-                            <label for="edad">Edad</label>
-                            <input type="date" class="form-control" formControlName="EdadUsuario" id="edad" placeholder="Edad">
+                            <label for="edad">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" formControlName="EdadUsuario" id="edad">
                             <!-- <small *ngIf="nitNoValido" class="text-danger">Ingrese solo números</small> -->
                         </div>
                     </div>

@@ -5,14 +5,14 @@
 
     <div class="form-row mb-4">
         <div class="col">
-            <!-- First name -->
+            <!-- Nombre -->
             <input type="number" id="id_producto" formControlName="IdProducto" class="form-control" style="display: none;">
 
             <input type="text" id="Name" class="form-control" [class.is-invalid]="nombreNoValido" formControlName="Nombre" placeholder="Nombre del Producto">
-            <small *ngIf="nombreNoValido" class="text-danger">Ingrese 3 letras</small>
+            <small *ngIf="nombreNoValido" class="text-danger">El nombre es Obligatorio</small>
         </div>
         <div class="col">
-            <!-- Last name -->
+            <!-- Apellido -->
             <label class="form-control btn-primary" style="cursor: pointer;">
                 <input style="display: none;" type="file" id="Imagen"  class="" accept="image/png, image/jpeg,  image/jpg">
                 Subir Imagén
@@ -20,14 +20,14 @@
         </div>
     </div>
 
-    <!--Description-->
+    <!--Descripcion-->
     <div class="form-group">
         <textarea class="form-control rounded-0" [class.is-invalid]="descripcionNoValido" id="descripcionNoValido" formControlName="Descripcion" rows="3" placeholder="Descripcion"></textarea>
         <small *ngIf="descripcionNoValido" class="text-danger">Ingrese una descripción válida</small>
     </div>
 
     <!-- Color -->
-    <div class="input-group mb-3">
+    <div class="form-group mb-3">
         <input type="text" id="Color" class="form-control" [class.is-invalid]="colorNoValido" formControlName="Color" placeholder="Color">
         <small *ngIf="colorNoValido" class="text-danger">Ingrese un Color</small>
     </div>
@@ -49,7 +49,7 @@
             <!-- <small *ngIf="ivaNoValido" class="text-danger"></small> -->
         </div>
     </div>
-
+    <!-- tallas -->
     <div class="form-row mb-4">
         <div class="col">
             <span>Talla S</span>
@@ -71,4 +71,3 @@
     <button type="button" class="btn btn-outline-primary" (click)="updateProduct()" *ngIf="response != null">Actualizar</button>
     <button type="button" class="btn btn-success" (click)="addProduct()" *ngIf="response == null">Agregar</button>
 </form>
-<!-- Default form register -->
